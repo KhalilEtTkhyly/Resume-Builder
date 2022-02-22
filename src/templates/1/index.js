@@ -7,8 +7,7 @@ function Template(props) {
           <p>Cell: <a href="#">{props.phone}</a>
           </p><p>Web: <a href="#">moriarty.com</a>
           </p><p>Email: <a href="#">{props.email}</a>
-          </p><p id="objective">I am a reserved but ambitious young professional seeking a career that fits my professional skills, personality, and murderous tendencies. My good birth, excellent education and phenomenal mathematical faculty have allowed me to advance the prospects of several criminal enterprises.
-          </p><dl>
+          </p><p id="objective">{props.overview}</p><dl>
             <dt>Education
             </dt><dd>
               <h2>Oxford University</h2>

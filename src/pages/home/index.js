@@ -11,8 +11,9 @@ function App() {
 
   const [show, setShow] = useState(false);
   const [fname, setfName] = useState("your name!");
-  const [phone, setPhone] = useState("your name!");
-  const [email, setEmail] = useState("your name!");
+  const [phone, setPhone] = useState("888-999-5555");
+  const [email, setEmail] = useState("myemail@mail.com");
+  const [overview, setOverview] = useState("I am a reserved but ambitious young professional seeking a career that fits my professional skills, personality, and murderous tendencies. My good birth, excellent education and phenomenal mathematical faculty have allowed me to advance the prospects of several criminal enterprises.");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -21,6 +22,7 @@ function App() {
       case "name": {setfName(val.target.value); break};
       case "phone": {setPhone(val.target.value); break};
       case "email": {setEmail(val.target.value); break};
+      case "overview": {setOverview(val.target.value); break};
     }
   }
 
@@ -64,17 +66,21 @@ function App() {
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Phone #:</Form.Label>
-                    <Form.Control onChange={(e) => handleChange(e, "phone")} type="text" placeholder="Full Name" />
+                    <Form.Control onChange={(e) => handleChange(e, "phone")} type="text" placeholder="Phone #" />
                     <Form.Text className="text-muted">
                       Full name as written on your ID.
                     </Form.Text>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicPhone">
                     <Form.Label>Email Address:</Form.Label>
-                    <Form.Control onChange={(e) => handleChange(e, "email")} type="text" placeholder="Full Name" />
+                    <Form.Control onChange={(e) => handleChange(e, "email")} type="text" placeholder="Email Address" />
                     <Form.Text className="text-muted">
                       Full name as written on your ID.
                     </Form.Text>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Overview about yourself:</Form.Label>
+                    <Form.Control onChange={(e) => handleChange(e, "overview")} as="textarea" rows={3} />
                   </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
@@ -87,7 +93,7 @@ function App() {
                 </Modal.Footer>
               </Modal>
             </>
-            <Template fname={fname} phone={phone} email={email} reference={ref} />
+            <Template fname={fname} phone={phone} email={email} overview={overview} reference={ref} />
         </Container>
     </>
     );
