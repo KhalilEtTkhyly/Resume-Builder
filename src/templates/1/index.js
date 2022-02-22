@@ -3,11 +3,10 @@ import './1.css'
 function Template(props) {
     return (
         <div id="resume" ref={props.reference}>
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/james-moriarty.jpg" alt="James Moriarty" />
-          <h1>James Moriarty</h1>
-          <p>Cell: <a href="#">555-666-7777</a>
+          <h1>{props.fname}</h1>
+          <p>Cell: <a href="#">{props.phone}</a>
           </p><p>Web: <a href="#">moriarty.com</a>
-          </p><p>Email: <a href="#">napoleon@crime.com</a>
+          </p><p>Email: <a href="#">{props.email}</a>
           </p><p id="objective">I am a reserved but ambitious young professional seeking a career that fits my professional skills, personality, and murderous tendencies. My good birth, excellent education and phenomenal mathematical faculty have allowed me to advance the prospects of several criminal enterprises.
           </p><dl>
             <dt>Education
