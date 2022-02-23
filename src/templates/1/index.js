@@ -2,55 +2,144 @@ import './1.css'
 
 function Template(props) {
     return (
-        <div id="resume" ref={props.reference}>
-          <h1>{props.fname}</h1>
-          <p>Cell: <a href="#">{props.phone}</a>
-          </p><p>Web: <a href="#">moriarty.com</a>
-          </p><p>Email: <a href="#">{props.email}</a>
-          </p><p id="objective">{props.overview}</p><dl>
-            <dt>Education
-            </dt><dd>
-              <h2>Oxford University</h2>
-              <p><strong>Major:</strong> Applied Mathematics<br />
-                <strong>Minor:</strong> Romance Languages</p>
-            </dd></dl>
-          <dl>
-            <dt>Skills
-            </dt><dd>
-              <h2>Office Skills</h2>
-              <p>Office and records management, database administration, event organization, customer support, travel coordination
-              </p><h2>Computer skills</h2>
-              <p>Microsoft productivity software (Word, Excel, etc), Adobe Creative Suite, Windows
-              </p></dd></dl>
-          <dl>
-            <dt>Experience
-            </dt><dd>
-              <h2>Consulting Criminal<span>London 1892 – present</span></h2>
-              <ul>
-                <li>Development within the criminal underworld
-                </li><li>Conducted negotiations with several rogue governments
-                </li></ul>
-              <h2>The Coldstream Guards<span>Army Coach, London 1889 – 1888</span></h2>
-              <ul>
-                <li>Recruiting, training and terrorizing young men.
-                </li></ul>
-              <h2>Oxford University<span>Professor of Mathematics 1885 – 1888</span></h2>
-              <ul>
-                <li>Published papers in binomials, asteroid dynamics and game theory
-                </li><li>Intimidated students
-                </li></ul>
-            </dd>
-          </dl>
-          <dl>
-            <dt>Hobbies
-            </dt><dd>World domination, Social Manipulation, Murder Most Foul
-            </dd></dl>
-          <dl>
-            <dt>References
-            </dt><dd>Available on request
-            </dd></dl>
-          <p className="objective" style={{marginTop: '2rem'}}>(<a href="http://thenewcode.com/553/Build-A-Responsive-Web-Résumé">Return to the original blog article</a>.)
-          </p></div>
+      <div>
+      <link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css" />
+      <div className="resume" ref={props.reference}>
+        <div className="header">
+          <div className="full-name">
+            <span className="first-name">{props.fname}</span> 
+          </div>
+          <div className="contact-info">
+            <span className="email">Email: </span>
+            <span className="email-val">{props.email}</span>
+            <span className="separator" />
+            <span className="phone">Phone: </span>
+            <span className="phone-val">{props.phone}</span>
+          </div>
+          <div className="about">
+            <span className="desc">{props.overview}</span>
+          </div>
+        </div>
+        <div className="details">
+          <div className="section">
+            <div className="section__title">Experience</div>
+            <div className="section__list">
+              <div className="section__list-item">
+                <div className="left">
+                  <div className="name">KlowdBox</div>
+                  <div className="addr">San Fr, CA</div>
+                  <div className="duration">Jan 2011 - Feb 2015</div>
+                </div>
+                <div className="right">
+                  <div className="name">Fr developer</div>
+                  <div className="desc">did This and that</div>
+                </div>
+              </div>
+              <div className="section__list-item">
+                <div className="left">
+                  <div className="name">Akount</div>
+                  <div className="addr">San Monica, CA</div>
+                  <div className="duration">Jan 2011 - Feb 2015</div>
+                </div>
+                <div className="right">
+                  <div className="name">Fr developer</div>
+                  <div className="desc">did This and that</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="section">
+            <div className="section__title">Education</div>
+            <div className="section__list">
+              <div className="section__list-item">
+                <div className="left">
+                  <div className="name">Sample Institute of technology</div>
+                  <div className="addr">San Fr, CA</div>
+                  <div className="duration">Jan 2011 - Feb 2015</div>
+                </div>
+                <div className="right">
+                  <div className="name">Fr developer</div>
+                  <div className="desc">did This and that</div>
+                </div>
+              </div>
+              <div className="section__list-item">
+                <div className="left">
+                  <div className="name">Akount</div>
+                  <div className="addr">San Monica, CA</div>
+                  <div className="duration">Jan 2011 - Feb 2015</div>
+                </div>
+                <div className="right">
+                  <div className="name">Fr developer</div>
+                  <div className="desc">did This and that</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="section">
+            <div className="section__title">Projects</div> 
+            <div className="section__list">
+              <div className="section__list-item">
+                <div className="name">DSP</div>
+                <div className="text">I am a front-end developer with more than 3 years of experience writing html, css, and js. I'm motivated, result-focused and seeking a successful team-oriented company with opportunity to grow.</div>
+              </div>
+              <div className="section__list-item">
+                <div className="name">DSP</div>
+                <div className="text">I am a front-end developer with more than 3 years of experience writing html, css, and js. I'm motivated, result-focused and seeking a successful team-oriented company with opportunity to grow. <a href="/login">link</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="section">
+            <div className="section__title">Skills</div>
+            <div className="skills">
+              <div className="skills__item">
+                <div className="left"><div className="name">
+                    Javascript
+                  </div></div>
+                <div className="right">
+                  <input id="ck1" type="checkbox" defaultChecked />
+                  <label htmlFor="ck1" />
+                  <input id="ck2" type="checkbox" defaultChecked />
+                  <label htmlFor="ck2" />
+                  <input id="ck3" type="checkbox" />
+                  <label htmlFor="ck3" />
+                  <input id="ck4" type="checkbox" />
+                  <label htmlFor="ck4" />
+                  <input id="ck5" type="checkbox" />
+                  <label htmlFor="ck5" />
+                </div>
+              </div>
+            </div>
+            <div className="skills__item">
+              <div className="left"><div className="name">
+                  CSS</div></div>
+              <div className="right">
+                <input id="ck1" type="checkbox" defaultChecked />
+                <label htmlFor="ck1" />
+                <input id="ck2" type="checkbox" defaultChecked />
+                <label htmlFor="ck2" />
+                <input id="ck3" type="checkbox" />
+                <label htmlFor="ck3" />
+                <input id="ck4" type="checkbox" />
+                <label htmlFor="ck4" />
+                <input id="ck5" type="checkbox" />
+                <label htmlFor="ck5" />
+              </div>
+            </div>
+          </div>
+          <div className="section">
+            <div className="section__title">
+              Interests
+            </div>
+            <div className="section__list">
+              <div className="section__list-item">
+                Football, programming.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
       );
 }
 
