@@ -34,6 +34,30 @@ function Template(props) {
       </div>
     )
 
+    const skillSection = props.skills.map(function(val, i) {
+      const num = parseInt(props.skills[i].score)
+      return(
+          <div className="skills__item">
+            <div className="left"><div className="name">
+                {val.name}
+              </div></div>
+            <div className="right">
+              <input id="ck1" type="checkbox" defaultChecked={num >= 1} />
+              <label htmlFor="ck1" />
+              <input id="ck2" type="checkbox" defaultChecked={num >= 2} />
+              <label htmlFor="ck2" />
+              <input id="ck3" type="checkbox" defaultChecked={num >= 3} />
+              <label htmlFor="ck3" />
+              <input id="ck4" type="checkbox" defaultChecked={num >= 4} />
+              <label htmlFor="ck4" />
+              <input id="ck5" type="checkbox" defaultChecked={num >= 5} />
+              <label htmlFor="ck5" />
+            </div>
+          </div>
+        )
+      }
+    ) 
+
     return (
       <div>
       <div className="resume" ref={props.reference}>
@@ -80,39 +104,7 @@ function Template(props) {
           <div className="section">
             <div className="section__title">Skills</div>
             <div className="skills">
-              <div className="skills__item">
-                <div className="left"><div className="name">
-                    Javascript
-                  </div></div>
-                <div className="right">
-                  <input id="ck1" type="checkbox" defaultChecked />
-                  <label htmlFor="ck1" />
-                  <input id="ck2" type="checkbox" defaultChecked />
-                  <label htmlFor="ck2" />
-                  <input id="ck3" type="checkbox" />
-                  <label htmlFor="ck3" />
-                  <input id="ck4" type="checkbox" />
-                  <label htmlFor="ck4" />
-                  <input id="ck5" type="checkbox" />
-                  <label htmlFor="ck5" />
-                </div>
-              </div>
-            </div>
-            <div className="skills__item">
-              <div className="left"><div className="name">
-                  CSS</div></div>
-              <div className="right">
-                <input id="ck1" type="checkbox" defaultChecked />
-                <label htmlFor="ck1" />
-                <input id="ck2" type="checkbox" defaultChecked />
-                <label htmlFor="ck2" />
-                <input id="ck3" type="checkbox" />
-                <label htmlFor="ck3" />
-                <input id="ck4" type="checkbox" />
-                <label htmlFor="ck4" />
-                <input id="ck5" type="checkbox" />
-                <label htmlFor="ck5" />
-              </div>
+              {skillSection}
             </div>
           </div>
           <div className="section">

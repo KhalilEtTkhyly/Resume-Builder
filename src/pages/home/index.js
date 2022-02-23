@@ -12,8 +12,10 @@ function App() {
   const [Model1, Model1Show] = useState(false);
   const [Model2, Model2Show] = useState(false);
   const [Model3, Model3Show] = useState(false);
+  const [Model4, Model4Show] = useState(false);
   const [educationIndex, setEducationIndex] = useState(0);
   const [experienceIndex, setExperienceIndex] = useState(0);
+  const [skillIndex, setSkillIndex] = useState(0);
 
   /** personal info variables */  
   const [fname, setfName] = useState("your name!");
@@ -36,7 +38,10 @@ function App() {
   const [jobStartDate, setJobStartDate] = useState(["August 2012",""]);
   const [jobEndDate, setJobEndDate] = useState(["May 2015",""]);
   const [jobDec, setJobDec] = useState(["May 2015",""]);
-  
+
+  /** skills variables */
+  const [skills, setSkills] = useState([{name: "PHP", score: 1}, {name: "JS", score: 5}])
+
   const handleModel1Close = () => Model1Show(false);
   const handleModel1Show = () => Model1Show(true);
 
@@ -46,7 +51,10 @@ function App() {
   const handleModel3Close = () => Model3Show(false);
   const handleModel3Show = () => Model3Show(true);
 
-  const handleChange = (val, field) => {
+  const handleModel4Close = () => Model4Show(false);
+  const handleModel4Show = () => Model4Show(true);
+
+  const handleChange = (val, field, propName) => {
     switch (field) {
       case "name": {setfName(val.target.value); break};
       case "phone": {setPhone(val.target.value); break};
@@ -67,14 +75,23 @@ function App() {
       case "jobStartDate": {setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, val.target.value)); break};
       case "jobEndDate": {setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, val.target.value)); break};
       case "jobDec": {setJobDec(changeAtIndex(experienceIndex, jobDec, val.target.value)); break};
+      case "skills": {setSkills(changeAtIndex(skillIndex, skills, val.target.value, propName)); console.log(skills) ;break};
+      case "skills": {setSkills(changeAtIndex(skillIndex, skills, val.target.value, propName)); console.log(skills) ;break};
     }
   }
 
-  const changeAtIndex = (i, arr, val) => {
-    setRefresh(!refresh)
-    let newArr = arr
-    newArr[i] = val
-    return newArr
+  const changeAtIndex = (i, arr, val, propName) => {
+      if(propName) {
+        let newArr = arr
+        let obj = arr[i]
+        obj[propName] = val
+        newArr[i] = obj
+        return newArr
+      }
+      setRefresh(!refresh)
+      let newArr = arr
+      newArr[i] = val
+      return newArr
   }
 
   const downloadCV = () => {
@@ -252,6 +269,54 @@ function App() {
                   <Button variant="secondary" onClick={() => {handleModel3Close(); handleModel2Show()}}>
                     Back
                   </Button>
+                  <Button variant="primary" onClick={() => {handleModel3Close(); handleModel4Show()}}>
+                    Next
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              {/** 
+               * fourth Model for collecting skills information!
+               */}
+              <Modal show={Model4} onHide={handleModel4Close} animation={true}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Skills Information:</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Skill Name:</Form.Label>
+                    <Form.Control value={skills[skillIndex].name} onChange={(e) => handleChange(e, "skills", "name")} type="text" placeholder="San Fr, CA" />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Level of proficiency:</Form.Label>
+                    <Form.Select onChange={(e) => handleChange(e, "skills", "score")} aria-label="Default select example">
+                      <option>-- Select one --</option>
+                      <option selected={skills[skillIndex].score === "1"} value="1">Novice</option>
+                      <option selected={skills[skillIndex].score === "2"} value="2">Beginner</option>
+                      <option selected={skills[skillIndex].score === "3"} value="3">Competent</option>
+                      <option selected={skills[skillIndex].score === "4"} value="4">Proficient</option>
+                      <option selected={skills[skillIndex].score === "5"} value="5">Expert</option>
+                    </Form.Select>
+                  </Form.Group>
+                  <Row>
+                    <Col>
+                      <Button size="sm" variant="success" onClick={() => {setSkillIndex(skillIndex+1)}}>
+                        + Add skill
+                      </Button>
+                    </Col>
+                    <Col>
+                        {
+                          (skillIndex >= 1 && skills[1].name !== "") && 
+                          <Button size="sm" variant="secondary" onClick={() => {setSkillIndex(skillIndex-1)}}>
+                            Previous experience background
+                          </Button>
+                        }
+                    </Col>
+                  </Row>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => {handleModel4Close(); handleModel3Show()}}>
+                    Back
+                  </Button>
                   <Button variant="primary" onClick={downloadCV}>
                     Download
                   </Button>
@@ -274,6 +339,7 @@ function App() {
               role={role}
               duration={jobStartDate + " - " + jobEndDate}
               jobDec={clocation}
+              skills={skills}
               />
         </Container>
     </>
