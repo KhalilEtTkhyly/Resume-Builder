@@ -18,6 +18,22 @@ function Template(props) {
       </div>
     )
 
+    const experienceSection = props.company.map((val, i) =>
+      <div className="section__list" key={i}>
+        <div className="section__list-item">
+          <div className="left">
+            <div className="name">{props.company[i]}</div>
+            <div className="addr">{props.clocation[i]}</div>
+            <div className="duration">{props.duration[i]}</div>
+          </div>
+          <div className="right">
+            <div className="name">{props.role[i]}</div>
+            <div className="desc">did This and that</div>
+          </div>
+        </div>
+      </div>
+    )
+
     return (
       <div>
       <div className="resume" ref={props.reference}>
@@ -40,28 +56,7 @@ function Template(props) {
           <div className="section">
             <div className="section__title">Experience</div>
             <div className="section__list">
-              <div className="section__list-item">
-                <div className="left">
-                  <div className="name">KlowdBox</div>
-                  <div className="addr">San Fr, CA</div>
-                  <div className="duration">Jan 2011 - Feb 2015</div>
-                </div>
-                <div className="right">
-                  <div className="name">Fr developer</div>
-                  <div className="desc">did This and that</div>
-                </div>
-              </div>
-              <div className="section__list-item">
-                <div className="left">
-                  <div className="name">Akount</div>
-                  <div className="addr">San Monica, CA</div>
-                  <div className="duration">Jan 2011 - Feb 2015</div>
-                </div>
-                <div className="right">
-                  <div className="name">Fr developer</div>
-                  <div className="desc">did This and that</div>
-                </div>
-              </div>
+              {experienceSection}
             </div>
           </div>
           <div className="section">

@@ -11,7 +11,9 @@ function App() {
   /** Model variables */
   const [Model1, Model1Show] = useState(false);
   const [Model2, Model2Show] = useState(false);
-  const [educationIndex, setEducationIndex] = useState(0); 
+  const [Model3, Model3Show] = useState(false);
+  const [educationIndex, setEducationIndex] = useState(0);
+  const [experienceIndex, setExperienceIndex] = useState(0);
 
   /** personal info variables */  
   const [fname, setfName] = useState("your name!");
@@ -21,17 +23,28 @@ function App() {
 
   /** education variables */  
   const [major, setMajor] = useState(["Computer Science",""]);
-  const [sname, setsName] = useState([""]);
+  const [sname, setsName] = useState(["Sample Institute of technology", ""]);
   const [slocation, setsLocation] = useState(["Rabat, Morocco",""]);
   const [schoolStartDate, setSchoolStartDate] = useState(["August 2012",""]);
   const [schoolEndDate, setSchoolEndDate] = useState(["May 2015",""]);
   const [refresh, setRefresh] = useState(true)
+
+  /** experience variables */  
+  const [company, setCompany] = useState(["Facebook",""]);
+  const [clocation, setClocation] = useState(["Los Angelas, CA"]);
+  const [role, setRole] = useState(["Font-End Engineer",""]);
+  const [jobStartDate, setJobStartDate] = useState(["August 2012",""]);
+  const [jobEndDate, setJobEndDate] = useState(["May 2015",""]);
+  const [jobDec, setJobDec] = useState(["May 2015",""]);
   
   const handleModel1Close = () => Model1Show(false);
   const handleModel1Show = () => Model1Show(true);
 
   const handleModel2Close = () => Model2Show(false);
   const handleModel2Show = () => Model2Show(true);
+
+  const handleModel3Close = () => Model3Show(false);
+  const handleModel3Show = () => Model3Show(true);
 
   const handleChange = (val, field) => {
     switch (field) {
@@ -47,6 +60,13 @@ function App() {
       case "slocation": {setsLocation(changeAtIndex(educationIndex, slocation, val.target.value)); break};
       case "schoolStartDate": {setSchoolStartDate(changeAtIndex(educationIndex, schoolStartDate, val.target.value)); break};
       case "schoolEndDate": {setSchoolEndDate(changeAtIndex(educationIndex, schoolEndDate, val.target.value)); break};
+
+      case "company": {setCompany(changeAtIndex(experienceIndex, company, val.target.value)); break};
+      case "clocation": {setClocation(changeAtIndex(experienceIndex, clocation, val.target.value)); break};
+      case "role": {setRole(changeAtIndex(experienceIndex, role, val.target.value)); break};
+      case "jobStartDate": {setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, val.target.value)); break};
+      case "jobEndDate": {setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, val.target.value)); break};
+      case "jobDec": {setJobDec(changeAtIndex(experienceIndex, jobDec, val.target.value)); break};
     }
   }
 
@@ -156,7 +176,7 @@ function App() {
                     </Col>
                     <Col>
                       {
-                        (educationIndex >= 1 && sname[1] != "") && 
+                        (educationIndex >= 1 && sname[1] !== "") && 
                         <Button size="sm" variant="secondary" onClick={() => {setEducationIndex(educationIndex-1)}}>
                           Previous Education background
                         </Button>
@@ -166,6 +186,70 @@ function App() {
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={() => {handleModel2Close(); handleModel1Show()}}>
+                    Back
+                  </Button>
+                  <Button variant="primary" onClick={() => {handleModel2Close(); handleModel3Show()}}>
+                    Next
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              {/**
+               * third Model for collecting experience information!
+               */}
+              <Modal show={Model3} onHide={handleModel3Close} animation={true}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Experience:</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Company Name:</Form.Label>
+                    <Form.Control value={company[experienceIndex]} onChange={(e) => handleChange(e, "company")} type="text" placeholder="Oxford University" />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Company location:</Form.Label>
+                    <Form.Control value={clocation[experienceIndex]} onChange={(e) => handleChange(e, "clocation")} type="text" placeholder="San Fr, CA" />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Row>
+                      <Col>
+                        <Form.Label>Start Date:</Form.Label>
+                        <Form.Control value={jobStartDate[experienceIndex]} onChange={(e) => handleChange(e, "jobStartDate")} type="text" placeholder="ex: 2012" />
+                      </Col>
+                      <Col>
+                        <Form.Label>End date:</Form.Label>
+                        <Form.Control value={jobEndDate[experienceIndex]} onChange={(e) => handleChange(e, "jobEndDate")} type="text" placeholder="ex: 2016" />
+                      </Col>
+                    </Row>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Job Title:</Form.Label>
+                  <Form.Control value={role[experienceIndex]} onChange={(e) => handleChange(e, "role")} type="text" placeholder="ex: Computer science" />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Job Description:</Form.Label>
+                    <Form.Control value={jobDec[experienceIndex]} onChange={(e) => handleChange(e, "jobDec")} as="textarea" rows={3} />
+                    <Form.Text className="text-muted">
+                      Describe your responsibilies and duties.
+                    </Form.Text>
+                  </Form.Group>
+                  <Row>
+                    <Col>
+                      <Button size="sm" variant="success" onClick={() => {setExperienceIndex(experienceIndex+1)}}>
+                        + Add experience background
+                      </Button>
+                    </Col>
+                    <Col>
+                      {
+                        (experienceIndex >= 1 && sname[1] !== "") && 
+                        <Button size="sm" variant="secondary" onClick={() => {setExperienceIndex(experienceIndex-1)}}>
+                          Previous experience background
+                        </Button>
+                      }
+                    </Col>
+                  </Row>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => {handleModel3Close(); handleModel2Show()}}>
                     Back
                   </Button>
                   <Button variant="primary" onClick={downloadCV}>
@@ -185,6 +269,11 @@ function App() {
               major={major}
               schoolStartDate={schoolStartDate}
               schoolEndDate={schoolEndDate}
+              company={company}
+              clocation={clocation}
+              role={role}
+              duration={jobStartDate + " - " + jobEndDate}
+              jobDec={clocation}
               />
         </Container>
     </>
