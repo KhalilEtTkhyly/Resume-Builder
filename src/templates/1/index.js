@@ -1,9 +1,25 @@
 import './1.css'
 
 function Template(props) {
+
+    const educationSection = props.sname.map((val, i) =>
+      <div className="section__list" key={i}>
+        <div className="section__list-item">
+          <div className="left">
+            <div className="name">{props.sname[i]}</div>
+            <div className="addr">{props.slocation[i]}</div>
+            <div className="duration">{props.schoolStartDate[i] + " - " + props.schoolEndDate[i]}</div>
+          </div>
+          <div className="right">
+            <div className="name">{props.major[i]}</div>
+            <div className="desc">did This and that</div>
+          </div>
+        </div>
+      </div>
+    )
+
     return (
       <div>
-      <link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css" />
       <div className="resume" ref={props.reference}>
         <div className="header">
           <div className="full-name">
@@ -50,30 +66,7 @@ function Template(props) {
           </div>
           <div className="section">
             <div className="section__title">Education</div>
-            <div className="section__list">
-              <div className="section__list-item">
-                <div className="left">
-                  <div className="name">Sample Institute of technology</div>
-                  <div className="addr">San Fr, CA</div>
-                  <div className="duration">Jan 2011 - Feb 2015</div>
-                </div>
-                <div className="right">
-                  <div className="name">Fr developer</div>
-                  <div className="desc">did This and that</div>
-                </div>
-              </div>
-              <div className="section__list-item">
-                <div className="left">
-                  <div className="name">Akount</div>
-                  <div className="addr">San Monica, CA</div>
-                  <div className="duration">Jan 2011 - Feb 2015</div>
-                </div>
-                <div className="right">
-                  <div className="name">Fr developer</div>
-                  <div className="desc">did This and that</div>
-                </div>
-              </div>
-            </div>
+            {educationSection}
           </div>
           <div className="section">
             <div className="section__title">Projects</div> 
