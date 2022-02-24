@@ -122,8 +122,8 @@ function App() {
         <Container>
             {/* <h1 ref={ref}>heello</h1> */}
             <>
-              <Button variant="primary" onClick={handleModel1Show}>
-                Launch demo modal
+              <Button style={{margin: "0 auto", display: "block"}} className="mt-3 shadow" variant="success" onClick={handleModel1Show}>
+                Use this Template!
               </Button>
               {/** 
                * first Model for collecting personal information!
@@ -310,13 +310,13 @@ function App() {
                     <Col>
                       {skillIndex <= 3 &&
                       <Button size="sm" variant="success" onClick={() => {setSkills([...skills, {}]); setSkillIndex(skillIndex+1)}}>
-                        + Add skill
+                        + Next skill
                       </Button>}
                     </Col>
                     <Col>
                       {(skillIndex >= 1 && skills[1].name !== "") && 
                       <Button size="sm" variant="secondary" onClick={() => {setSkillIndex(skillIndex-1)}}>
-                        Previous experience background
+                        Previous skill background
                       </Button>}                        
                     </Col>
                   </Row>
