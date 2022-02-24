@@ -39,7 +39,7 @@ function Template(props) {
       if (Object.keys(val).length === 0) return;
       return(
           <div className="skills__item" key={i}>
-            <ListGroup as="ol" numbered>
+            <ListGroup as="ul">
               <ListGroup.Item
                 as="li"
                 className="d-flex justify-content-between align-items-start"
@@ -77,27 +77,13 @@ function Template(props) {
         </div>
         <div className="details">
           <div className="section">
-            <div className="section__title">Experience</div>
-            <div className="section__list">
-              {experienceSection}
-            </div>
-          </div>
-          <div className="section">
             <div className="section__title">Education</div>
             {educationSection}
           </div>
           <div className="section">
-            <div className="section__title">Projects</div> 
+            <div className="section__title">Experience</div>
             <div className="section__list">
-              <div className="section__list-item">
-                <div className="name">DSP</div>
-                <div className="text">I am a front-end developer with more than 3 years of experience writing html, css, and js. I'm motivated, result-focused and seeking a successful team-oriented company with opportunity to grow.</div>
-              </div>
-              <div className="section__list-item">
-                <div className="name">DSP</div>
-                <div className="text">I am a front-end developer with more than 3 years of experience writing html, css, and js. I'm motivated, result-focused and seeking a successful team-oriented company with opportunity to grow. <a href="/login">link</a>
-                </div>
-              </div>
+              {experienceSection}
             </div>
           </div>
           <div className="section">
