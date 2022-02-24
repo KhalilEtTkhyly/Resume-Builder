@@ -1,58 +1,57 @@
-import './1.css'
+import {ListGroup, Badge} from 'react-bootstrap';
+import './1.css';
 
 function Template(props) {
-
     const educationSection = props.sname.map((val, i) =>
-      <div className="section__list" key={i}>
-        <div className="section__list-item">
-          <div className="left">
-            <div className="name">{props.sname[i]}</div>
-            <div className="addr">{props.slocation[i]}</div>
-            <div className="duration">{props.schoolStartDate[i] + " - " + props.schoolEndDate[i]}</div>
+      (val && 
+        <div className="section__list" key={i}>
+          <div className="section__list-item">
+            <div className="left">
+              <div className="name">{props.sname[i]}</div>
+              <div className="addr">{props.slocation[i]}</div>
+              <div className="duration">{props.schoolStartDate[i] + " - " + props.schoolEndDate[i]}</div>
+            </div>
+            <div className="right">
+              <div className="name">{props.major[i]}</div>
+            </div>
           </div>
-          <div className="right">
-            <div className="name">{props.major[i]}</div>
-            <div className="desc">did This and that</div>
-          </div>
-        </div>
-      </div>
+        </div>)
     )
 
     const experienceSection = props.company.map((val, i) =>
-      <div className="section__list" key={i}>
-        <div className="section__list-item">
-          <div className="left">
-            <div className="name">{props.company[i]}</div>
-            <div className="addr">{props.clocation[i]}</div>
-            <div className="duration">{props.duration[i]}</div>
+      (val && 
+        <div className="section__list" key={i}>
+          <div className="section__list-item">
+            <div className="left">
+              <div className="name">{props.company[i] && props.company[i]}</div>
+              <div className="addr">{props.clocation[i] && props.clocation[i]}</div>
+              <div className="duration">{props.jobStartDate[i] + " - " +  props.jobEndDate[i]}</div>
+            </div>
+            <div className="right">
+              <div className="name">{props.role[i] && props.role[i]}</div>
+            </div>
           </div>
-          <div className="right">
-            <div className="name">{props.role[i]}</div>
-            <div className="desc">did This and that</div>
-          </div>
-        </div>
-      </div>
+        </div>)
     )
 
     const skillSection = props.skills.map(function(val, i) {
       const num = parseInt(props.skills[i].score)
+      if (Object.keys(val).length === 0) return;
       return(
-          <div className="skills__item">
-            <div className="left"><div className="name">
-                {val.name}
-              </div></div>
-            <div className="right">
-              <input id="ck1" type="checkbox" defaultChecked={num >= 1} />
-              <label htmlFor="ck1" />
-              <input id="ck2" type="checkbox" defaultChecked={num >= 2} />
-              <label htmlFor="ck2" />
-              <input id="ck3" type="checkbox" defaultChecked={num >= 3} />
-              <label htmlFor="ck3" />
-              <input id="ck4" type="checkbox" defaultChecked={num >= 4} />
-              <label htmlFor="ck4" />
-              <input id="ck5" type="checkbox" defaultChecked={num >= 5} />
-              <label htmlFor="ck5" />
-            </div>
+          <div className="skills__item" key={i}>
+            <ListGroup as="ol" numbered>
+              <ListGroup.Item
+                as="li"
+                className="d-flex justify-content-between align-items-start"
+              >
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">{val.name}</div>
+                </div>
+                <Badge variant="primary" pill>
+                  {num*20 + "%"}
+                </Badge>
+              </ListGroup.Item>
+            </ListGroup>
           </div>
         )
       }
@@ -113,7 +112,7 @@ function Template(props) {
             </div>
             <div className="section__list">
               <div className="section__list-item">
-                Football, programming.
+                {props.interests}
               </div>
             </div>
           </div>

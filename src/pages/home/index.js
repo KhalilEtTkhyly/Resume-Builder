@@ -1,9 +1,9 @@
-import React, { useCallback, createRef, useEffect, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import Header from '../../sections/header'
 // import Main from '../../sections/main'
 import Template from "../../templates/1";
 import { toPng } from 'html-to-image';
-import {Card, Container, Row, Col, Button, Modal, Form} from 'react-bootstrap'
+import {Container, Row, Col, Button, Modal, Form} from 'react-bootstrap'
 
 function App() {
   const ref = createRef()
@@ -16,31 +16,32 @@ function App() {
   const [educationIndex, setEducationIndex] = useState(0);
   const [experienceIndex, setExperienceIndex] = useState(0);
   const [skillIndex, setSkillIndex] = useState(0);
-
+  
   /** personal info variables */  
   const [fname, setfName] = useState("your name!");
   const [phone, setPhone] = useState("888-999-5555");
   const [email, setEmail] = useState("myemail@mail.com");
   const [overview, setOverview] = useState("I am a reserved but ambitious young professional seeking a career that fits my professional skills, personality, and murderous tendencies. My good birth, excellent education and phenomenal mathematical faculty have allowed me to advance the prospects of several criminal enterprises.");
-
+  
   /** education variables */  
-  const [major, setMajor] = useState(["Computer Science",""]);
-  const [sname, setsName] = useState(["Sample Institute of technology", ""]);
-  const [slocation, setsLocation] = useState(["Rabat, Morocco",""]);
-  const [schoolStartDate, setSchoolStartDate] = useState(["August 2012",""]);
-  const [schoolEndDate, setSchoolEndDate] = useState(["May 2015",""]);
+  const [major, setMajor] = useState(["Computer Science", "", "", ""]);
+  const [sname, setsName] = useState(["Sample Institute of technology", "", "", ""]);
+  const [slocation, setsLocation] = useState(["Rabat, Morocco", "", "", ""]);
+  const [schoolStartDate, setSchoolStartDate] = useState(["August 2012", "", "", ""]);
+  const [schoolEndDate, setSchoolEndDate] = useState(["May 2015", "", "", ""]);
   const [refresh, setRefresh] = useState(true)
 
-  /** experience variables */  
-  const [company, setCompany] = useState(["Facebook",""]);
-  const [clocation, setClocation] = useState(["Los Angelas, CA"]);
-  const [role, setRole] = useState(["Font-End Engineer",""]);
-  const [jobStartDate, setJobStartDate] = useState(["August 2012",""]);
-  const [jobEndDate, setJobEndDate] = useState(["May 2015",""]);
-  const [jobDec, setJobDec] = useState(["May 2015",""]);
+  /** experience variables */
+  const [company, setCompany] = useState(["Facebook","","",""]);
+  const [clocation, setClocation] = useState(["Los Angelas, CA","","",""]);
+  const [role, setRole] = useState(["Font-End Engineer","","",""]);
+  const [jobStartDate, setJobStartDate] = useState(["August 2012","","",""]);
+  const [jobEndDate, setJobEndDate] = useState(["May 2015","","",""]);
+  const [jobDec, setJobDec] = useState(["May 2015","","",""]);
 
-  /** skills variables */
-  const [skills, setSkills] = useState([{name: "PHP", score: 1}, {name: "JS", score: 5}])
+  /** skills & interests variables */
+  const [skills, setSkills] = useState([{name: "PHP", score: 1}, {name: "JS", score: 2}, {name: "HTML", score: 5}, {name: "CSS", score: 5}, {name: "ReactJS", score: 4}])
+  const [interests, setInterests] = useState("");
 
   const handleModel1Close = () => Model1Show(false);
   const handleModel1Show = () => Model1Show(true);
@@ -55,28 +56,31 @@ function App() {
   const handleModel4Show = () => Model4Show(true);
 
   const handleChange = (val, field, propName) => {
+
+    const value = val.target.value
+
     switch (field) {
-      case "name": {setfName(val.target.value); break};
-      case "phone": {setPhone(val.target.value); break};
-      case "email": {setEmail(val.target.value); break};
-      case "overview": {setOverview(val.target.value); break};
+      case "name": {setfName(value); break};
+      case "phone": {setPhone(value); break};
+      case "email": {setEmail(value); break};
+      case "overview": {setOverview(value); break};
     }
 
     switch (field) {
-      case "major": {setMajor(changeAtIndex(educationIndex, major, val.target.value)); break};
-      case "sname": {setsName(changeAtIndex(educationIndex, sname, val.target.value)); break};
-      case "slocation": {setsLocation(changeAtIndex(educationIndex, slocation, val.target.value)); break};
-      case "schoolStartDate": {setSchoolStartDate(changeAtIndex(educationIndex, schoolStartDate, val.target.value)); break};
-      case "schoolEndDate": {setSchoolEndDate(changeAtIndex(educationIndex, schoolEndDate, val.target.value)); break};
+      case "major": {setMajor(changeAtIndex(educationIndex, major, value)); break};
+      case "sname": {setsName(changeAtIndex(educationIndex, sname, value)); break};
+      case "slocation": {setsLocation(changeAtIndex(educationIndex, slocation, value)); break};
+      case "schoolStartDate": {setSchoolStartDate(changeAtIndex(educationIndex, schoolStartDate, value)); break};
+      case "schoolEndDate": {setSchoolEndDate(changeAtIndex(educationIndex, schoolEndDate, value)); break};
 
-      case "company": {setCompany(changeAtIndex(experienceIndex, company, val.target.value)); break};
-      case "clocation": {setClocation(changeAtIndex(experienceIndex, clocation, val.target.value)); break};
-      case "role": {setRole(changeAtIndex(experienceIndex, role, val.target.value)); break};
-      case "jobStartDate": {setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, val.target.value)); break};
-      case "jobEndDate": {setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, val.target.value)); break};
-      case "jobDec": {setJobDec(changeAtIndex(experienceIndex, jobDec, val.target.value)); break};
-      case "skills": {setSkills(changeAtIndex(skillIndex, skills, val.target.value, propName)); console.log(skills) ;break};
-      case "skills": {setSkills(changeAtIndex(skillIndex, skills, val.target.value, propName)); console.log(skills) ;break};
+      case "company": {setCompany(changeAtIndex(experienceIndex, company, value)); break};
+      case "clocation": {setClocation(changeAtIndex(experienceIndex, clocation, value)); break};
+      case "role": {setRole(changeAtIndex(experienceIndex, role, value)); break};
+      case "jobStartDate": {setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, value)); break};
+      case "jobEndDate": {setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, value)); break};
+      case "jobDec": {setJobDec(changeAtIndex(experienceIndex, jobDec, value)); break};
+      case "skills": {setSkills(changeAtIndex(skillIndex, skills, value, propName)); break};
+      case "interests": {setInterests(value); break};
     }
   }
 
@@ -86,11 +90,13 @@ function App() {
         let obj = arr[i]
         obj[propName] = val
         newArr[i] = obj
+        setRefresh(!refresh)
+        console.log(val, newArr)
         return newArr
       }
-      setRefresh(!refresh)
       let newArr = arr
       newArr[i] = val
+      setRefresh(!refresh)
       return newArr
   }
 
@@ -187,13 +193,15 @@ function App() {
                   </Form.Group>
                   <Row>
                     <Col>
-                      <Button size="sm" variant="success" onClick={() => {setEducationIndex(educationIndex+1)}}>
-                        + Add education background
-                      </Button>
+                      { educationIndex <= 3 && 
+                        <Button size="sm" variant="success" onClick={() => {setEducationIndex(educationIndex+1)}}>
+                          + Add education background
+                        </Button>
+                      }
                     </Col>
                     <Col>
                       {
-                        (educationIndex >= 1 && sname[1] !== "") && 
+                        (educationIndex >= 1) && 
                         <Button size="sm" variant="secondary" onClick={() => {setEducationIndex(educationIndex-1)}}>
                           Previous Education background
                         </Button>
@@ -251,13 +259,14 @@ function App() {
                   </Form.Group>
                   <Row>
                     <Col>
-                      <Button size="sm" variant="success" onClick={() => {setExperienceIndex(experienceIndex+1)}}>
-                        + Add experience background
-                      </Button>
+                      {experienceIndex <= 3 && 
+                        <Button size="sm" variant="success" onClick={() => {setExperienceIndex(experienceIndex+1)}}>
+                          + Add experience background
+                        </Button>} 
                     </Col>
                     <Col>
                       {
-                        (experienceIndex >= 1 && sname[1] !== "") && 
+                        (experienceIndex >= 1) && 
                         <Button size="sm" variant="secondary" onClick={() => {setExperienceIndex(experienceIndex-1)}}>
                           Previous experience background
                         </Button>
@@ -279,7 +288,7 @@ function App() {
                */}
               <Modal show={Model4} onHide={handleModel4Close} animation={true}>
                 <Modal.Header closeButton>
-                  <Modal.Title>Skills Information:</Modal.Title>
+                  <Modal.Title>Skills & Interests:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <Form.Group className="mb-3" controlId="formBasicName">
@@ -288,30 +297,33 @@ function App() {
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Level of proficiency:</Form.Label>
-                    <Form.Select onChange={(e) => handleChange(e, "skills", "score")} aria-label="Default select example">
+                    <Form.Select defaultValue={"1"} onChange={(e) => handleChange(e, "skills", "score")} aria-label="Default select example">
                       <option>-- Select one --</option>
-                      <option selected={skills[skillIndex].score === "1"} value="1">Novice</option>
-                      <option selected={skills[skillIndex].score === "2"} value="2">Beginner</option>
-                      <option selected={skills[skillIndex].score === "3"} value="3">Competent</option>
-                      <option selected={skills[skillIndex].score === "4"} value="4">Proficient</option>
-                      <option selected={skills[skillIndex].score === "5"} value="5">Expert</option>
+                      <option selected={skills[skillIndex].score === 1} value="1">Novice</option>
+                      <option selected={skills[skillIndex].score === 2} value="2">Beginner</option>
+                      <option selected={skills[skillIndex].score === 3} value="3">Competent</option>
+                      <option selected={skills[skillIndex].score === 4} value="4">Proficient</option>
+                      <option selected={skills[skillIndex].score === 5} value="5">Expert</option>
                     </Form.Select>
                   </Form.Group>
                   <Row>
                     <Col>
-                      <Button size="sm" variant="success" onClick={() => {setSkillIndex(skillIndex+1)}}>
+                      {skillIndex <= 3 &&
+                      <Button size="sm" variant="success" onClick={() => {setSkills([...skills, {}]); setSkillIndex(skillIndex+1)}}>
                         + Add skill
-                      </Button>
+                      </Button>}
                     </Col>
                     <Col>
-                        {
-                          (skillIndex >= 1 && skills[1].name !== "") && 
-                          <Button size="sm" variant="secondary" onClick={() => {setSkillIndex(skillIndex-1)}}>
-                            Previous experience background
-                          </Button>
-                        }
+                      {(skillIndex >= 1 && skills[1].name !== "") && 
+                      <Button size="sm" variant="secondary" onClick={() => {setSkillIndex(skillIndex-1)}}>
+                        Previous experience background
+                      </Button>}                        
                     </Col>
                   </Row>
+                  <Form.Group className="mt-3 mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Interests:</Form.Label>
+                    <Form.Control value={interests} onChange={(e) => handleChange(e, "interests")} as="textarea" rows={3} placeholder="Ex: Football, programming." />
+                  </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={() => {handleModel4Close(); handleModel3Show()}}>
@@ -337,10 +349,12 @@ function App() {
               company={company}
               clocation={clocation}
               role={role}
-              duration={jobStartDate + " - " + jobEndDate}
+              jobStartDate={jobStartDate}
+              jobEndDate={jobEndDate}
               jobDec={clocation}
               skills={skills}
-              />
+              interests={interests}
+            />
         </Container>
     </>
     );
