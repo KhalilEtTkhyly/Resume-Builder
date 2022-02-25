@@ -1,13 +1,16 @@
 import React, { createRef, useEffect, useState } from 'react';
 import Header from '../../sections/header'
 // import Main from '../../sections/main'
-import {default as TemplatePlaceHolder} from "../../templates/1";
+import {default as TemplatePlaceHolder1} from "../../templates/1";
+import {default as TemplatePlaceHolder2} from "../../templates/2";
 import { toPng } from 'html-to-image';
 import {Container, Row, Col, Button, Modal, Form} from 'react-bootstrap'
+import { useParams } from "react-router-dom";
 
 function Template() {
   const ref = createRef()
-
+  const {id} = useParams()
+  console.log(id)
   /** Model variables */
   const [Model1, Model1Show] = useState(false);
   const [Model2, Model2Show] = useState(false);
@@ -37,10 +40,11 @@ function Template() {
   const [role, setRole] = useState(["Font-End Engineer","","",""]);
   const [jobStartDate, setJobStartDate] = useState(["August 2012","","",""]);
   const [jobEndDate, setJobEndDate] = useState(["May 2015","","",""]);
+  const [jobDec, setJobDec] = useState(["May 2015","","",""]);
 
   /** skills & interests variables */
   const [skills, setSkills] = useState([{name: "PHP", score: 1}, {name: "JS", score: 2}, {name: "HTML", score: 5}, {name: "CSS", score: 5}, {name: "ReactJS", score: 4}])
-  const [interests, setInterests] = useState("");
+  const [interests, setInterests] = useState("java, PHP");
 
   const handleModel1Close = () => Model1Show(false);
   const handleModel1Show = () => Model1Show(true);
@@ -77,6 +81,7 @@ function Template() {
       case "role": {setRole(changeAtIndex(experienceIndex, role, value)); break};
       case "jobStartDate": {setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, value)); break};
       case "jobEndDate": {setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, value)); break};
+      case "jobDec": {setJobDec(changeAtIndex(experienceIndex, jobDec, value)); break};
       case "skills": {setSkills(changeAtIndex(skillIndex, skills, value, propName)); break};
       case "interests": {setInterests(value); break};
     }
@@ -99,7 +104,7 @@ function Template() {
   }
 
   const downloadCV = () => {
-    toPng(ref.current, { cacheBust: true, width: 1300, height: 1500})
+    toPng(ref.current, { cacheBust: true, width: 1024})
       .then((dataUrl) => {
         const link = document.createElement('a')
         link.download = 'my-image-name.png'
@@ -248,6 +253,10 @@ function Template() {
                     <Form.Label>Job Title:</Form.Label>
                   <Form.Control value={role[experienceIndex]} onChange={(e) => handleChange(e, "role")} type="text" placeholder="ex: Computer science" />
                   </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Job Description:</Form.Label>
+                    <Form.Control value={jobDec[experienceIndex]} onChange={(e) => handleChange(e, "jobDec")} as="textarea" rows={3} />
+                  </Form.Group>
                   <Row>
                     <Col>
                       {experienceIndex <= 3 && 
@@ -308,12 +317,15 @@ function Template() {
                       {(skillIndex >= 1 && skills[1].name !== "") && 
                       <Button size="sm" variant="secondary" onClick={() => {setSkillIndex(skillIndex-1)}}>
                         Previous skill background
-                      </Button>}                        
+                      </Button>}
                     </Col>
                   </Row>
                   <Form.Group className="mt-3 mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Interests:</Form.Label>
                     <Form.Control value={interests} onChange={(e) => handleChange(e, "interests")} as="textarea" rows={3} placeholder="Ex: Football, programming." />
+                    <Form.Text className="text-muted">
+                      Please use colon "," to separate your personal interests.
+                    </Form.Text>    
                   </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
@@ -326,7 +338,8 @@ function Template() {
                 </Modal.Footer>
               </Modal>
             </>
-            <TemplatePlaceHolder 
+            {id == "1" &&
+            <TemplatePlaceHolder1
               fname={fname} 
               phone={phone} 
               email={email} 
@@ -345,7 +358,28 @@ function Template() {
               jobDec={clocation}
               skills={skills}
               interests={interests}
-            />
+            />}
+            {id == "2" &&
+            <TemplatePlaceHolder2
+              fname={fname} 
+              phone={phone} 
+              email={email} 
+              overview={overview} 
+              reference={ref} 
+              sname={sname}
+              slocation={slocation}
+              major={major}
+              schoolStartDate={schoolStartDate}
+              schoolEndDate={schoolEndDate}
+              company={company}
+              clocation={clocation}
+              role={role}
+              jobStartDate={jobStartDate}
+              jobEndDate={jobEndDate}
+              jobDec={clocation}
+              skills={skills}
+              interests={interests}
+            />}
         </Container>
     </>
     );
