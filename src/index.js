@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import Template from './pages/template';
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import App from './pages/home';
 import reportWebVitals from './reportWebVitals';
+// import CSS
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'animate.css';
 
 ReactDOM.render(
   <React.StrictMode>

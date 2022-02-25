@@ -123,7 +123,7 @@ function Template() {
             {/* <h1 ref={ref}>heello</h1> */}
             <>
               <Button style={{margin: "0 auto", display: "block"}} className="mt-3 shadow" variant="success" onClick={handleModel1Show}>
-                Use this Template!
+                Start Editing
               </Button>
               {/** 
                * first Model for collecting personal information!
@@ -329,7 +329,7 @@ function Template() {
                   <Button variant="secondary" onClick={() => {handleModel4Close(); handleModel3Show()}}>
                     Back
                   </Button>
-                  <Button variant="primary" onClick={downloadCV}>
+                  <Button variant="primary" className='animate__animated animate__headShake animate__infinite' onClick={downloadCV}>
                     Download
                   </Button>
                 </Modal.Footer>
