@@ -4,12 +4,19 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Template from './pages/template';
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import App from './pages/home';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="template" element={<Template />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

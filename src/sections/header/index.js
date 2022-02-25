@@ -1,10 +1,11 @@
 import {Navbar, Container, Nav, NavDropdown, Button} from 'react-bootstrap'
+import { Link } from "react-router-dom";
 
 function Header() {
     return (
         <Navbar collapseOnSelect style={{"paddingTop": 20, "paddingBottom": 20}} expand="lg" bg="dark" variant="dark">
         <Container>
-        <Navbar.Brand href="#home">ResumeBuilder</Navbar.Brand>
+        <Link to="/"><Navbar.Brand>ResumeBuilder</Navbar.Brand></Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

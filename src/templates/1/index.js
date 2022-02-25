@@ -58,7 +58,6 @@ function Template(props) {
     ) 
 
     return (
-      <div>
       <div className="resume" ref={props.reference}>
         <div className="header">
           <div className="full-name">
@@ -104,7 +103,6 @@ function Template(props) {
           </div>
         </div>
       </div>
-    </div>
       );
 }
 
