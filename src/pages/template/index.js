@@ -37,7 +37,6 @@ function Template() {
   const [role, setRole] = useState(["Font-End Engineer","","",""]);
   const [jobStartDate, setJobStartDate] = useState(["August 2012","","",""]);
   const [jobEndDate, setJobEndDate] = useState(["May 2015","","",""]);
-  const [jobDec, setJobDec] = useState(["May 2015","","",""]);
 
   /** skills & interests variables */
   const [skills, setSkills] = useState([{name: "PHP", score: 1}, {name: "JS", score: 2}, {name: "HTML", score: 5}, {name: "CSS", score: 5}, {name: "ReactJS", score: 4}])
@@ -78,7 +77,6 @@ function Template() {
       case "role": {setRole(changeAtIndex(experienceIndex, role, value)); break};
       case "jobStartDate": {setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, value)); break};
       case "jobEndDate": {setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, value)); break};
-      case "jobDec": {setJobDec(changeAtIndex(experienceIndex, jobDec, value)); break};
       case "skills": {setSkills(changeAtIndex(skillIndex, skills, value, propName)); break};
       case "interests": {setInterests(value); break};
     }
@@ -249,13 +247,6 @@ function Template() {
                   <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Job Title:</Form.Label>
                   <Form.Control value={role[experienceIndex]} onChange={(e) => handleChange(e, "role")} type="text" placeholder="ex: Computer science" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Job Description:</Form.Label>
-                    <Form.Control value={jobDec[experienceIndex]} onChange={(e) => handleChange(e, "jobDec")} as="textarea" rows={3} />
-                    <Form.Text className="text-muted">
-                      Describe your responsibilies and duties.
-                    </Form.Text>
                   </Form.Group>
                   <Row>
                     <Col>
