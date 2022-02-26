@@ -6,11 +6,11 @@ import {default as TemplatePlaceHolder2} from "../../templates/2";
 import { toPng } from 'html-to-image';
 import {Container, Row, Col, Button, Modal, Form} from 'react-bootstrap'
 import { useParams } from "react-router-dom";
-
+// import css
+import './template.css';
 function Template() {
   const ref = createRef()
   const {id} = useParams()
-  console.log(id)
   /** Model variables */
   const [Model1, Model1Show] = useState(false);
   const [Model2, Model2Show] = useState(false);
@@ -21,7 +21,7 @@ function Template() {
   const [skillIndex, setSkillIndex] = useState(0);
   
   /** personal info variables */  
-  const [fname, setfName] = useState("your name!");
+  const [fname, setfName] = useState("your name");
   const [phone, setPhone] = useState("888-999-5555");
   const [email, setEmail] = useState("myemail@mail.com");
   const [overview, setOverview] = useState("I am a reserved but ambitious young professional seeking a career that fits my professional skills, personality, and murderous tendencies. My good birth, excellent education and phenomenal mathematical faculty have allowed me to advance the prospects of several criminal enterprises.");
@@ -104,10 +104,10 @@ function Template() {
   }
 
   const downloadCV = () => {
-    toPng(ref.current, { cacheBust: true, width: 1024})
+    toPng(ref.current, { cacheBust: true})
       .then((dataUrl) => {
         const link = document.createElement('a')
-        link.download = 'my-image-name.png'
+        link.download = fname.replace(' ', '') + 'resume.png'
         link.href = dataUrl
         link.click()
       })
@@ -122,265 +122,268 @@ function Template() {
   return (
     <>
         <Header />
-        <Container>
-            {/* <h1 ref={ref}>heello</h1> */}
-            <>
-              <Button style={{margin: "0 auto", display: "block"}} className="mt-3 shadow" variant="success" onClick={handleModel1Show}>
-                Start Editing
-              </Button>
-              {/** 
-               * first Model for collecting personal information!
-               */}
-              <Modal show={Model1} onHide={handleModel1Close} animation={true}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Personal Information:</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Full Name:</Form.Label>
-                    <Form.Control onChange={(e) => handleChange(e, "name")} type="text" placeholder="Full Name" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Phone #:</Form.Label>
-                    <Form.Control onChange={(e) => handleChange(e, "phone")} type="text" placeholder="Phone #" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPhone">
-                    <Form.Label>Email Address:</Form.Label>
-                    <Form.Control onChange={(e) => handleChange(e, "email")} type="text" placeholder="Email Address" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Overview about yourself:</Form.Label>
-                    <Form.Control onChange={(e) => handleChange(e, "overview")} as="textarea" rows={3} />
-                  </Form.Group>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleModel1Close}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={() => {handleModel1Close(); handleModel2Show()}}>
-                    Next
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-              {/** 
-               * Second Model for collecting education information!
-               */}
-              <Modal show={Model2} onHide={handleModel2Close} animation={true}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Education:</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>School Name:</Form.Label>
-                    <Form.Control value={sname[educationIndex]} onChange={(e) => handleChange(e, "sname")} type="text" placeholder="Oxford University" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>School location:</Form.Label>
-                    <Form.Control value={slocation[educationIndex]} onChange={(e) => handleChange(e, "slocation")} type="text" placeholder="San Fr, CA" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicName">
+        <div className='template py-4'>
+
+          <Container>
+              {/* <h1 ref={ref}>heello</h1> */}
+              <>
+                <Button style={{margin: "0 auto", display: "block"}} size="lg" className="mb-4" variant="success" onClick={handleModel1Show}>
+                  Start Editing <i className="bi bi-pencil-square"></i>
+                </Button>
+                {/** 
+                 * first Model for collecting personal information!
+                 */}
+                <Modal show={Model1} onHide={handleModel1Close} animation={true}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Personal Information:</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>Full Name:</Form.Label>
+                      <Form.Control onChange={(e) => handleChange(e, "name")} type="text" placeholder="Full Name" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Label>Phone #:</Form.Label>
+                      <Form.Control onChange={(e) => handleChange(e, "phone")} type="text" placeholder="Phone #" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPhone">
+                      <Form.Label>Email Address:</Form.Label>
+                      <Form.Control onChange={(e) => handleChange(e, "email")} type="text" placeholder="Email Address" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                      <Form.Label>Overview about yourself:</Form.Label>
+                      <Form.Control onChange={(e) => handleChange(e, "overview")} as="textarea" rows={3} />
+                    </Form.Group>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleModel1Close}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={() => {handleModel1Close(); handleModel2Show()}}>
+                      Next
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+                {/** 
+                 * Second Model for collecting education information!
+                 */}
+                <Modal show={Model2} onHide={handleModel2Close} animation={true}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Education:</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>School Name:</Form.Label>
+                      <Form.Control value={sname[educationIndex]} onChange={(e) => handleChange(e, "sname")} type="text" placeholder="Oxford University" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>School location:</Form.Label>
+                      <Form.Control value={slocation[educationIndex]} onChange={(e) => handleChange(e, "slocation")} type="text" placeholder="San Fr, CA" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Row>
+                        <Col>
+                          <Form.Label>Start Date:</Form.Label>
+                          <Form.Control value={schoolStartDate[educationIndex]} onChange={(e) => handleChange(e, "schoolStartDate")} type="text" placeholder="ex: 2012" />
+                        </Col>
+                        <Col>
+                          <Form.Label>End date:</Form.Label>
+                          <Form.Control value={schoolEndDate[educationIndex]} onChange={(e) => handleChange(e, "schoolEndDate")} type="text" placeholder="ex: 2016" />
+                        </Col>
+                      </Row>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>Major:</Form.Label>
+                    <Form.Control value={major[educationIndex]} onChange={(e) => handleChange(e, "major")} type="text" placeholder="ex: Computer science" />
+                    </Form.Group>
                     <Row>
                       <Col>
-                        <Form.Label>Start Date:</Form.Label>
-                        <Form.Control value={schoolStartDate[educationIndex]} onChange={(e) => handleChange(e, "schoolStartDate")} type="text" placeholder="ex: 2012" />
+                        { educationIndex <= 3 && 
+                          <Button size="sm" variant="success" onClick={() => {setEducationIndex(educationIndex+1)}}>
+                            + Add education background
+                          </Button>
+                        }
                       </Col>
                       <Col>
-                        <Form.Label>End date:</Form.Label>
-                        <Form.Control value={schoolEndDate[educationIndex]} onChange={(e) => handleChange(e, "schoolEndDate")} type="text" placeholder="ex: 2016" />
+                        {
+                          (educationIndex >= 1) && 
+                          <Button size="sm" variant="secondary" onClick={() => {setEducationIndex(educationIndex-1)}}>
+                            Previous Education background
+                          </Button>
+                        }
                       </Col>
                     </Row>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Major:</Form.Label>
-                  <Form.Control value={major[educationIndex]} onChange={(e) => handleChange(e, "major")} type="text" placeholder="ex: Computer science" />
-                  </Form.Group>
-                  <Row>
-                    <Col>
-                      { educationIndex <= 3 && 
-                        <Button size="sm" variant="success" onClick={() => {setEducationIndex(educationIndex+1)}}>
-                          + Add education background
-                        </Button>
-                      }
-                    </Col>
-                    <Col>
-                      {
-                        (educationIndex >= 1) && 
-                        <Button size="sm" variant="secondary" onClick={() => {setEducationIndex(educationIndex-1)}}>
-                          Previous Education background
-                        </Button>
-                      }
-                    </Col>
-                  </Row>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={() => {handleModel2Close(); handleModel1Show()}}>
-                    Back
-                  </Button>
-                  <Button variant="primary" onClick={() => {handleModel2Close(); handleModel3Show()}}>
-                    Next
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-              {/**
-               * third Model for collecting experience information!
-               */}
-              <Modal show={Model3} onHide={handleModel3Close} animation={true}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Experience:</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Company Name:</Form.Label>
-                    <Form.Control value={company[experienceIndex]} onChange={(e) => handleChange(e, "company")} type="text" placeholder="Oxford University" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Company location:</Form.Label>
-                    <Form.Control value={clocation[experienceIndex]} onChange={(e) => handleChange(e, "clocation")} type="text" placeholder="San Fr, CA" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicName">
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => {handleModel2Close(); handleModel1Show()}}>
+                      Back
+                    </Button>
+                    <Button variant="primary" onClick={() => {handleModel2Close(); handleModel3Show()}}>
+                      Next
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+                {/**
+                 * third Model for collecting experience information!
+                 */}
+                <Modal show={Model3} onHide={handleModel3Close} animation={true}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Experience:</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>Company Name:</Form.Label>
+                      <Form.Control value={company[experienceIndex]} onChange={(e) => handleChange(e, "company")} type="text" placeholder="Oxford University" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>Company location:</Form.Label>
+                      <Form.Control value={clocation[experienceIndex]} onChange={(e) => handleChange(e, "clocation")} type="text" placeholder="San Fr, CA" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Row>
+                        <Col>
+                          <Form.Label>Start Date:</Form.Label>
+                          <Form.Control value={jobStartDate[experienceIndex]} onChange={(e) => handleChange(e, "jobStartDate")} type="text" placeholder="ex: 2012" />
+                        </Col>
+                        <Col>
+                          <Form.Label>End date:</Form.Label>
+                          <Form.Control value={jobEndDate[experienceIndex]} onChange={(e) => handleChange(e, "jobEndDate")} type="text" placeholder="ex: 2016" />
+                        </Col>
+                      </Row>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>Job Title:</Form.Label>
+                    <Form.Control value={role[experienceIndex]} onChange={(e) => handleChange(e, "role")} type="text" placeholder="ex: Computer science" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                      <Form.Label>Job Description:</Form.Label>
+                      <Form.Control value={jobDec[experienceIndex]} onChange={(e) => handleChange(e, "jobDec")} as="textarea" rows={3} />
+                    </Form.Group>
                     <Row>
                       <Col>
-                        <Form.Label>Start Date:</Form.Label>
-                        <Form.Control value={jobStartDate[experienceIndex]} onChange={(e) => handleChange(e, "jobStartDate")} type="text" placeholder="ex: 2012" />
+                        {experienceIndex <= 3 && 
+                          <Button size="sm" variant="success" onClick={() => {setExperienceIndex(experienceIndex+1)}}>
+                            + Add experience background
+                          </Button>} 
                       </Col>
                       <Col>
-                        <Form.Label>End date:</Form.Label>
-                        <Form.Control value={jobEndDate[experienceIndex]} onChange={(e) => handleChange(e, "jobEndDate")} type="text" placeholder="ex: 2016" />
+                        {
+                          (experienceIndex >= 1) && 
+                          <Button size="sm" variant="secondary" onClick={() => {setExperienceIndex(experienceIndex-1)}}>
+                            Previous experience background
+                          </Button>
+                        }
                       </Col>
                     </Row>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Job Title:</Form.Label>
-                  <Form.Control value={role[experienceIndex]} onChange={(e) => handleChange(e, "role")} type="text" placeholder="ex: Computer science" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Job Description:</Form.Label>
-                    <Form.Control value={jobDec[experienceIndex]} onChange={(e) => handleChange(e, "jobDec")} as="textarea" rows={3} />
-                  </Form.Group>
-                  <Row>
-                    <Col>
-                      {experienceIndex <= 3 && 
-                        <Button size="sm" variant="success" onClick={() => {setExperienceIndex(experienceIndex+1)}}>
-                          + Add experience background
-                        </Button>} 
-                    </Col>
-                    <Col>
-                      {
-                        (experienceIndex >= 1) && 
-                        <Button size="sm" variant="secondary" onClick={() => {setExperienceIndex(experienceIndex-1)}}>
-                          Previous experience background
-                        </Button>
-                      }
-                    </Col>
-                  </Row>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={() => {handleModel3Close(); handleModel2Show()}}>
-                    Back
-                  </Button>
-                  <Button variant="primary" onClick={() => {handleModel3Close(); handleModel4Show()}}>
-                    Next
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-              {/** 
-               * fourth Model for collecting skills information!
-               */}
-              <Modal show={Model4} onHide={handleModel4Close} animation={true}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Skills & Interests:</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Skill Name:</Form.Label>
-                    <Form.Control value={skills[skillIndex].name} onChange={(e) => handleChange(e, "skills", "name")} type="text" placeholder="San Fr, CA" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Level of proficiency:</Form.Label>
-                    <Form.Select defaultValue={"1"} onChange={(e) => handleChange(e, "skills", "score")} aria-label="Default select example">
-                      <option>-- Select one --</option>
-                      <option selected={skills[skillIndex].score === 1} value="1">Novice</option>
-                      <option selected={skills[skillIndex].score === 2} value="2">Beginner</option>
-                      <option selected={skills[skillIndex].score === 3} value="3">Competent</option>
-                      <option selected={skills[skillIndex].score === 4} value="4">Proficient</option>
-                      <option selected={skills[skillIndex].score === 5} value="5">Expert</option>
-                    </Form.Select>
-                  </Form.Group>
-                  <Row>
-                    <Col>
-                      {skillIndex <= 3 &&
-                      <Button size="sm" variant="success" onClick={() => {setSkills([...skills, {}]); setSkillIndex(skillIndex+1)}}>
-                        + Next skill
-                      </Button>}
-                    </Col>
-                    <Col>
-                      {(skillIndex >= 1 && skills[1].name !== "") && 
-                      <Button size="sm" variant="secondary" onClick={() => {setSkillIndex(skillIndex-1)}}>
-                        Previous skill background
-                      </Button>}
-                    </Col>
-                  </Row>
-                  <Form.Group className="mt-3 mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Interests:</Form.Label>
-                    <Form.Control value={interests} onChange={(e) => handleChange(e, "interests")} as="textarea" rows={3} placeholder="Ex: Football, programming." />
-                    <Form.Text className="text-muted">
-                      Please use colon "," to separate your personal interests.
-                    </Form.Text>    
-                  </Form.Group>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={() => {handleModel4Close(); handleModel3Show()}}>
-                    Back
-                  </Button>
-                  <Button variant="primary" className='animate__animated animate__headShake animate__infinite' onClick={downloadCV}>
-                    Download
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            </>
-            {id == "1" &&
-            <TemplatePlaceHolder1
-              fname={fname} 
-              phone={phone} 
-              email={email} 
-              overview={overview} 
-              reference={ref} 
-              sname={sname}
-              slocation={slocation}
-              major={major}
-              schoolStartDate={schoolStartDate}
-              schoolEndDate={schoolEndDate}
-              company={company}
-              clocation={clocation}
-              role={role}
-              jobStartDate={jobStartDate}
-              jobEndDate={jobEndDate}
-              jobDec={clocation}
-              skills={skills}
-              interests={interests}
-            />}
-            {id == "2" &&
-            <TemplatePlaceHolder2
-              fname={fname} 
-              phone={phone} 
-              email={email} 
-              overview={overview} 
-              reference={ref} 
-              sname={sname}
-              slocation={slocation}
-              major={major}
-              schoolStartDate={schoolStartDate}
-              schoolEndDate={schoolEndDate}
-              company={company}
-              clocation={clocation}
-              role={role}
-              jobStartDate={jobStartDate}
-              jobEndDate={jobEndDate}
-              jobDec={clocation}
-              skills={skills}
-              interests={interests}
-            />}
-        </Container>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => {handleModel3Close(); handleModel2Show()}}>
+                      Back
+                    </Button>
+                    <Button variant="primary" onClick={() => {handleModel3Close(); handleModel4Show()}}>
+                      Next
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+                {/** 
+                 * fourth Model for collecting skills information!
+                 */}
+                <Modal show={Model4} onHide={handleModel4Close} animation={true}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Skills & Interests:</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>Skill Name:</Form.Label>
+                      <Form.Control value={skills[skillIndex].name} onChange={(e) => handleChange(e, "skills", "name")} type="text" placeholder="San Fr, CA" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                      <Form.Label>Level of proficiency:</Form.Label>
+                      <Form.Select defaultValue={"1"} onChange={(e) => handleChange(e, "skills", "score")} aria-label="Default select example">
+                        <option>-- Select one --</option>
+                        <option selected={skills[skillIndex].score === 1} value="1">Novice</option>
+                        <option selected={skills[skillIndex].score === 2} value="2">Beginner</option>
+                        <option selected={skills[skillIndex].score === 3} value="3">Competent</option>
+                        <option selected={skills[skillIndex].score === 4} value="4">Proficient</option>
+                        <option selected={skills[skillIndex].score === 5} value="5">Expert</option>
+                      </Form.Select>
+                    </Form.Group>
+                    <Row>
+                      <Col>
+                        {skillIndex <= 3 &&
+                        <Button size="sm" variant="success" onClick={() => {setSkills([...skills, {}]); setSkillIndex(skillIndex+1)}}>
+                          + Next skill
+                        </Button>}
+                      </Col>
+                      <Col>
+                        {(skillIndex >= 1 && skills[1].name !== "") && 
+                        <Button size="sm" variant="secondary" onClick={() => {setSkillIndex(skillIndex-1)}}>
+                          Previous skill background
+                        </Button>}
+                      </Col>
+                    </Row>
+                    <Form.Group className="mt-3 mb-3" controlId="exampleForm.ControlTextarea1">
+                      <Form.Label>Interests:</Form.Label>
+                      <Form.Control value={interests} onChange={(e) => handleChange(e, "interests")} as="textarea" rows={3} placeholder="Ex: Football, programming." />
+                      <Form.Text className="text-muted">
+                        Please use colon "," to separate your personal interests.
+                      </Form.Text>    
+                    </Form.Group>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => {handleModel4Close(); handleModel3Show()}}>
+                      Back
+                    </Button>
+                    <Button variant="primary" className='animate__animated animate__headShake animate__infinite' onClick={downloadCV}>
+                      Download
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </>
+              {id == "1" &&
+              <TemplatePlaceHolder1
+                fname={fname} 
+                phone={phone} 
+                email={email} 
+                overview={overview} 
+                reference={ref} 
+                sname={sname}
+                slocation={slocation}
+                major={major}
+                schoolStartDate={schoolStartDate}
+                schoolEndDate={schoolEndDate}
+                company={company}
+                clocation={clocation}
+                role={role}
+                jobStartDate={jobStartDate}
+                jobEndDate={jobEndDate}
+                jobDec={clocation}
+                skills={skills}
+                interests={interests}
+              />}
+              {id == "2" &&
+              <TemplatePlaceHolder2
+                fname={fname} 
+                phone={phone} 
+                email={email} 
+                overview={overview} 
+                reference={ref} 
+                sname={sname}
+                slocation={slocation}
+                major={major}
+                schoolStartDate={schoolStartDate}
+                schoolEndDate={schoolEndDate}
+                company={company}
+                clocation={clocation}
+                role={role}
+                jobStartDate={jobStartDate}
+                jobEndDate={jobEndDate}
+                jobDec={clocation}
+                skills={skills}
+                interests={interests}
+              />}
+          </Container>
+        </div>
     </>
     );
 }
