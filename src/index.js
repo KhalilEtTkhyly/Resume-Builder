@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Template from './pages/template';
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import App from './pages/home';
 import reportWebVitals from './reportWebVitals';
+// Pages
+import App from './pages/home';
+import Template from './pages/template';
+import Collection from './pages/collection';
 // import CSS
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,7 +18,8 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="template" element={<Template />} />
+        <Route path="/collection" element={<Collection />} />
+        <Route path="template/:id" element={<Template />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
