@@ -6,12 +6,13 @@ function Template(props) {
     (val && <p>{props.schoolStartDate[i] + " - " +  props.schoolEndDate[i]} | <em> {props.sname[i]} | {props.major[i]}</em></p>)
   )
 
-  const experienceSection = props.company.map((val) =>
-    (val && <p>{props.jobStartDate} - {props.jobEndDate} <em> {props.company}. | {props.role}</em></p>)
+  const experienceSection = props.company.map((val, i) =>
+    (val && <p>{props.jobStartDate[i]} - {props.jobEndDate[i]} <em> {props.company[i]}. | {props.role[i]}</em></p>)
   )
 
   const skillSection = props.skills.map(function(val, i) {
     if (Object.keys(val).length === 0) return;
+    if (!val.name) return
     return(
         <li>{val.name}</li>
       )
@@ -24,10 +25,10 @@ function Template(props) {
         <div className="wrapper clearfix" ref={props.reference}>
           <div className='top'>
             <div className="name-hero">
-              <div className="me-img" />
+              <div className='me-img' style={{backgroundImage: 'url('+props.profileImage+')'}}></div>
               <div className="name-text">
                 <h1>{props.fname}</h1>
-                <p>{props.email}</p> 
+                <p>{props.email}</p>
                 <p>{props.phone}</p>
               </div>
             </div>
