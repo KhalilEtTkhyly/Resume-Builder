@@ -1,0 +1,12 @@
+.logo {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #0b090a;
+    margin: 0;
+    border-radius: 4px;
+}
+
+.logo span {
+    color: white !important;
+    margin: 0 !important;
+}
