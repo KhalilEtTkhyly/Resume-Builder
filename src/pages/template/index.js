@@ -6,7 +6,7 @@ import {default as TemplatePlaceHolder1} from "../../templates/1";
 import {default as TemplatePlaceHolder2} from "../../templates/2";
 import { toPng } from 'html-to-image';
 import { jsPDF } from "jspdf";
-import {Container, Row, Col, Button, Modal, Form} from 'react-bootstrap'
+import {Container, Row, Col, Button, Modal, Form, Dropdown} from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 // import css
 import './template.css';
@@ -197,20 +197,23 @@ function Template() {
       return newArr
   }
   
-  const downloadCV = () => {
+  const downloadCV = (format) => {
     toPng(ref.current, { cacheBust: true})
     .then((dataUrl) => {
-        const doc = new jsPDF({orientation: "p", unit: "px", format: "a1"});
-        const img = new Image()
-        img.src = dataUrl
-        img.onload = () => {
-          doc.addImage(dataUrl, "PNG",0, 0, img.width, img.height);
-          doc.save()
+        if (format == "pdf") {
+          const doc = new jsPDF({orientation: "p", unit: "px", format: "a1"});
+          const img = new Image()
+          img.src = dataUrl
+          img.onload = () => {
+            doc.addImage(dataUrl, "PNG",0, 0, img.width, img.height);
+            doc.save()
+          }
+        } else {
+          const link = document.createElement('a')
+          link.download = fname.replace(/\s/g, '-') + '-resume.png'
+          link.href = dataUrl
+          link.click()
         }
-        // const link = document.createElement('a')
-        // link.download = fname.replace(/\s/g, '-') + '-resume.png'
-        // link.href = dataUrl
-        // link.click()
       })
       .catch((err) => {
         console.log(err)
@@ -228,14 +231,20 @@ function Template() {
           <Container>
               {/* <h1 ref={ref}>heello</h1> */}
               <>
-                <header style={{textAlign: 'center'}}>
-                  <Button size="lg" className="mb-4" variant="success" onClick={handleModel1Show}>
+                <header className='mb-4' style={{textAlign: 'center'}}>
+                  <Button size="lg" variant="success" onClick={handleModel1Show}>
                     Start Editing <i className="bi bi-pencil-square"></i>
                   </Button>
-                  <Button variant="primary" size="lg" className="mb-4 mx-3" onClick={downloadCV}>
-                    Download <i className="bi bi-cloud-arrow-down-fill"></i>
-                  </Button>
-                  <Button variant="danger" size="lg" className="mb-4" onClick={clearAll}>
+                  <Dropdown style={{display: 'inline-block'}}>
+                    <Dropdown.Toggle size="lg" variant="primary" id="dropdown-basic">
+                      Download As <i className="bi bi-cloud-arrow-down-fill"></i>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => downloadCV("pdf")} as="span">PDF</Dropdown.Item>
+                      <Dropdown.Item onClick={() => downloadCV("png")} as="span">Image</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  <Button variant="danger" size="lg" onClick={clearAll}>
                     Clear Data <i className="bi bi-trash"></i>
                   </Button>
                 </header>
