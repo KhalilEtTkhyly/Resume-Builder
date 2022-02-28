@@ -5,10 +5,12 @@ import Footer from '../../sections/footer'
 import {default as TemplatePlaceHolder1} from "../../templates/1";
 import {default as TemplatePlaceHolder2} from "../../templates/2";
 import { toPng } from 'html-to-image';
+import { jsPDF } from "jspdf";
 import {Container, Row, Col, Button, Modal, Form} from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 // import css
 import './template.css';
+
 function Template() {
   const ref = createRef()
   const {id} = useParams()
@@ -22,41 +24,43 @@ function Template() {
   const [skillIndex, setSkillIndex] = useState(0);
   
   /** personal info variables */  
-  const [fname, setfName] = useState(localStorage.getItem("fname") ? localStorage.getItem("fname") : "");
-  const [phone, setPhone] = useState(localStorage.getItem("phone") ? localStorage.getItem("phone") : "");
-  const [email, setEmail] = useState(localStorage.getItem("email") ? localStorage.getItem("email") : "");
+  const [fname, setfName] = useState(localStorage.getItem("fname") ? localStorage.getItem("fname") : "Your name!");
+  const [phone, setPhone] = useState(localStorage.getItem("phone") ? localStorage.getItem("phone") : "012-345-6789");
+  const [email, setEmail] = useState(localStorage.getItem("email") ? localStorage.getItem("email") : "myemail@mail.com");
   const [overview, setOverview] = useState(localStorage.getItem("overview") ? localStorage.getItem("overview") : "");
   const [profileImage, setProfileImage] = useState("https://i.pravatar.cc/300");
   
   /** education variables */  
   const [major, setMajor] = useState(localStorage.getItem("major") ? JSON.parse(localStorage.getItem("major")) : ["Computer Science", "", "", ""]);
-  const [sname, setsName] = useState(["Sample Institute of technology", "", "", ""]);
-  const [slocation, setsLocation] = useState(["Rabat, Morocco", "", "", ""]);
-  const [schoolStartDate, setSchoolStartDate] = useState(["August 2012", "", "", ""]);
-  const [schoolEndDate, setSchoolEndDate] = useState(["May 2015", "", "", ""]);
+  const [sname, setsName] = useState(localStorage.getItem("sname") ? JSON.parse(localStorage.getItem("sname")) : ["Sample Institute of technology", "", "", ""]);
+  const [slocation, setsLocation] = useState(localStorage.getItem("slocation") ? JSON.parse(localStorage.getItem("slocation")) :["Rabat, Morocco", "", "", ""]);
+  const [schoolStartDate, setSchoolStartDate] = useState(localStorage.getItem("schoolStartDate") ? JSON.parse(localStorage.getItem("schoolStartDate")) :["August 2012", "", "", ""]);
+  const [schoolEndDate, setSchoolEndDate] = useState(localStorage.getItem("schoolEndDate") ? JSON.parse(localStorage.getItem("schoolEndDate")) :["May 2015", "", "", ""]);
   const [refresh, setRefresh] = useState(true)
 
   /** experience variables */
-  const [company, setCompany] = useState(["Facebook","","",""]);
-  const [clocation, setClocation] = useState(["Los Angelas, CA","","",""]);
-  const [role, setRole] = useState(["Font-End Engineer","","",""]);
-  const [jobStartDate, setJobStartDate] = useState(["August 2012","","",""]);
-  const [jobEndDate, setJobEndDate] = useState(["May 2015","","",""]);
-  const [jobDec, setJobDec] = useState(["May 2015","","",""]);
+  const [company, setCompany] = useState(localStorage.getItem("company") ? JSON.parse(localStorage.getItem("company")) :["Facebook","","",""]);
+  const [clocation, setClocation] = useState(localStorage.getItem("clocation") ? JSON.parse(localStorage.getItem("clocation")) :["Los Angelas, CA","","",""]);
+  const [role, setRole] = useState(localStorage.getItem("role") ? JSON.parse(localStorage.getItem("role")) :["Font-End Engineer","","",""]);
+  const [jobStartDate, setJobStartDate] = useState(localStorage.getItem("jobStartDate") ? JSON.parse(localStorage.getItem("jobStartDate")) :["August 2012","","",""]);
+  const [jobEndDate, setJobEndDate] = useState(localStorage.getItem("jobEndDate") ? JSON.parse(localStorage.getItem("jobEndDate")) :["May 2015","","",""]);
+  const [jobDec, setJobDec] = useState(localStorage.getItem("jobDec") ? JSON.parse(localStorage.getItem("jobDec")) :["May 2015","","",""]);
 
   /** skills & interests variables */
-  const [skills, setSkills] = useState([
-    {name: "PHP", score: 1},
+  const skillArr = [
+    {name: "HTML", score: 5},
+    {name: "PHP", score: 4},
+    {name: "CSS", score: 4},
+    {name: "JAVA", score: 4},
     {name: "", score: 1},
     {name: "", score: 1},
     {name: "", score: 1},
     {name: "", score: 1},
     {name: "", score: 1},
     {name: "", score: 1},
-    {name: "", score: 1},
-    {name: "", score: 1},
-    {name: "", score: 1},
-  ])
+  ]
+
+  const [skills, setSkills] = useState(localStorage.getItem("skills") ? JSON.parse(localStorage.getItem("skills")) : skillArr)
 
   const [interests, setInterests] = useState("java, PHP");
 
@@ -114,31 +118,31 @@ function Template() {
       break};
 
       case "company": {
-        localStorage.setItem("company", JSON.stringify(changeAtIndex(educationIndex, company, value)))
+        localStorage.setItem("company", JSON.stringify(changeAtIndex(experienceIndex, company, value)))
         setCompany(changeAtIndex(experienceIndex, company, value));
       break};
       case "clocation": {
-        localStorage.setItem("clocation", JSON.stringify(changeAtIndex(educationIndex, clocation, value)))
+        localStorage.setItem("clocation", JSON.stringify(changeAtIndex(experienceIndex, clocation, value)))
         setClocation(changeAtIndex(experienceIndex, clocation, value));
       break};
       case "role": {
-        localStorage.setItem("role", JSON.stringify(changeAtIndex(educationIndex, role, value)))
+        localStorage.setItem("role", JSON.stringify(changeAtIndex(experienceIndex, role, value)))
         setRole(changeAtIndex(experienceIndex, role, value));
       break};
       case "jobStartDate": {
-        localStorage.setItem("jobStartDate", JSON.stringify(changeAtIndex(educationIndex, jobStartDate, value)))
+        localStorage.setItem("jobStartDate", JSON.stringify(changeAtIndex(experienceIndex, jobStartDate, value)))
         setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, value));
       break};
       case "jobEndDate": {
-        localStorage.setItem("jobEndDate", JSON.stringify(changeAtIndex(educationIndex, jobEndDate, value)))
+        localStorage.setItem("jobEndDate", JSON.stringify(changeAtIndex(experienceIndex, jobEndDate, value)))
         setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, value));
       break};
       case "jobDec": {
-        localStorage.setItem("jobDec", JSON.stringify(changeAtIndex(educationIndex, jobDec, value)))
+        localStorage.setItem("jobDec", JSON.stringify(changeAtIndex(experienceIndex, jobDec, value)))
         setJobDec(changeAtIndex(experienceIndex, jobDec, value));
       break};
       case "skills": {
-        localStorage.setItem("skills", JSON.stringify(changeAtIndex(educationIndex, skills, value)))
+        localStorage.setItem("skills", JSON.stringify(changeAtIndex(skillIndex, skills, value, propName)))
         setSkills(changeAtIndex(skillIndex, skills, value, propName));
       break};
       case "interests": {
@@ -146,6 +150,27 @@ function Template() {
         setInterests(value);
       break};
     }
+  }
+
+  const clearAll = () => {
+    localStorage.clear()
+    // reset state
+    setfName("")
+    setPhone("")
+    setEmail("")
+    setMajor([""])
+    setsName([""])
+    setSchoolStartDate([""])
+    setSchoolEndDate([""])
+    setsLocation([""])
+    setCompany([""])
+    setClocation([""])
+    setRole([""])
+    setJobStartDate([""])
+    setJobEndDate([""])
+    setJobDec([""])
+    setSkills([""])
+    setInterests("")
   }
 
   const handleImageChange = (e) => {
@@ -171,14 +196,21 @@ function Template() {
       setRefresh(!refresh)
       return newArr
   }
-
+  
   const downloadCV = () => {
     toPng(ref.current, { cacheBust: true})
-      .then((dataUrl) => {
-        const link = document.createElement('a')
-        link.download = fname.replace(/\s/g, '-') + '-resume.png'
-        link.href = dataUrl
-        link.click()
+    .then((dataUrl) => {
+        const doc = new jsPDF({orientation: "p", unit: "px", format: "a1"});
+        const img = new Image()
+        img.src = dataUrl
+        img.onload = () => {
+          doc.addImage(dataUrl, "PNG",0, 0, img.width, img.height);
+          doc.save()
+        }
+        // const link = document.createElement('a')
+        // link.download = fname.replace(/\s/g, '-') + '-resume.png'
+        // link.href = dataUrl
+        // link.click()
       })
       .catch((err) => {
         console.log(err)
@@ -200,8 +232,11 @@ function Template() {
                   <Button size="lg" className="mb-4" variant="success" onClick={handleModel1Show}>
                     Start Editing <i className="bi bi-pencil-square"></i>
                   </Button>
-                  <Button variant="danger" size="lg" className="mb-4" onClick={downloadCV}>
+                  <Button variant="primary" size="lg" className="mb-4 mx-3" onClick={downloadCV}>
                     Download <i className="bi bi-cloud-arrow-down-fill"></i>
+                  </Button>
+                  <Button variant="danger" size="lg" className="mb-4" onClick={clearAll}>
+                    Clear Data <i className="bi bi-trash"></i>
                   </Button>
                 </header>
                 {/** 
@@ -312,7 +347,7 @@ function Template() {
                   <Modal.Body>
                     <Form.Group className="mb-3">
                       <Form.Label>Company Name:</Form.Label>
-                      <Form.Control value={company[experienceIndex]} onChange={(e) => handleChange(e, "company")} type="text" placeholder="Oxford University" />
+                      <Form.Control value={company[experienceIndex]} onChange={(e) => handleChange(e, "company")} type="text" placeholder="Facebook" />
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Company location:</Form.Label>
@@ -374,7 +409,7 @@ function Template() {
                   <Modal.Body>
                     <Form.Group className="mb-3">
                       <Form.Label>Skill Name:</Form.Label>
-                      <Form.Control value={skills[skillIndex].name} onChange={(e) => handleChange(e, "skills", "name")} type="text" placeholder="San Fr, CA" />
+                      <Form.Control value={skills[skillIndex].name} onChange={(e) => handleChange(e, "skills", "name")} type="text" placeholder="PHP" />
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Level of proficiency:</Form.Label>
