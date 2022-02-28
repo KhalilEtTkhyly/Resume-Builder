@@ -1,5 +1,6 @@
 import React, { createRef, useEffect, useState } from 'react';
 import Header from '../../sections/header'
+import Footer from '../../sections/footer'
 // import Main from '../../sections/main'
 import {default as TemplatePlaceHolder1} from "../../templates/1";
 import {default as TemplatePlaceHolder2} from "../../templates/2";
@@ -21,13 +22,14 @@ function Template() {
   const [skillIndex, setSkillIndex] = useState(0);
   
   /** personal info variables */  
-  const [fname, setfName] = useState("your name");
-  const [phone, setPhone] = useState("888-999-5555");
-  const [email, setEmail] = useState("myemail@mail.com");
-  const [overview, setOverview] = useState("I am a reserved but ambitious young professional seeking a career that fits my professional skills, personality, and murderous tendencies. My good birth, excellent education and phenomenal mathematical faculty have allowed me to advance the prospects of several criminal enterprises.");
+  const [fname, setfName] = useState(localStorage.getItem("fname") ? localStorage.getItem("fname") : "");
+  const [phone, setPhone] = useState(localStorage.getItem("phone") ? localStorage.getItem("phone") : "");
+  const [email, setEmail] = useState(localStorage.getItem("email") ? localStorage.getItem("email") : "");
+  const [overview, setOverview] = useState(localStorage.getItem("overview") ? localStorage.getItem("overview") : "");
+  const [profileImage, setProfileImage] = useState("https://i.pravatar.cc/300");
   
   /** education variables */  
-  const [major, setMajor] = useState(["Computer Science", "", "", ""]);
+  const [major, setMajor] = useState(localStorage.getItem("major") ? JSON.parse(localStorage.getItem("major")) : ["Computer Science", "", "", ""]);
   const [sname, setsName] = useState(["Sample Institute of technology", "", "", ""]);
   const [slocation, setsLocation] = useState(["Rabat, Morocco", "", "", ""]);
   const [schoolStartDate, setSchoolStartDate] = useState(["August 2012", "", "", ""]);
@@ -43,7 +45,19 @@ function Template() {
   const [jobDec, setJobDec] = useState(["May 2015","","",""]);
 
   /** skills & interests variables */
-  const [skills, setSkills] = useState([{name: "PHP", score: 1}, {name: "JS", score: 2}, {name: "HTML", score: 5}, {name: "CSS", score: 5}, {name: "ReactJS", score: 4}])
+  const [skills, setSkills] = useState([
+    {name: "PHP", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+    {name: "", score: 1},
+  ])
+
   const [interests, setInterests] = useState("java, PHP");
 
   const handleModel1Close = () => Model1Show(false);
@@ -63,27 +77,83 @@ function Template() {
     const value = val.target.value
 
     switch (field) {
-      case "name": {setfName(value); break};
-      case "phone": {setPhone(value); break};
-      case "email": {setEmail(value); break};
-      case "overview": {setOverview(value); break};
+      case "name": {
+        localStorage.setItem("fname", value)
+        setfName(value); break};
+      case "phone": {
+        localStorage.setItem("phone", value)
+        setPhone(value); break};
+      case "email": {
+        localStorage.setItem("email", value)
+        setEmail(value); break};
+      case "overview": {
+        localStorage.setItem("overview", value)
+        setOverview(value); break};
     }
 
     switch (field) {
-      case "major": {setMajor(changeAtIndex(educationIndex, major, value)); break};
-      case "sname": {setsName(changeAtIndex(educationIndex, sname, value)); break};
-      case "slocation": {setsLocation(changeAtIndex(educationIndex, slocation, value)); break};
-      case "schoolStartDate": {setSchoolStartDate(changeAtIndex(educationIndex, schoolStartDate, value)); break};
-      case "schoolEndDate": {setSchoolEndDate(changeAtIndex(educationIndex, schoolEndDate, value)); break};
+      case "major": {
+        localStorage.setItem("major", JSON.stringify(changeAtIndex(educationIndex, major, value)))
+        setMajor(changeAtIndex(educationIndex, major, value)); 
+      break};
+      case "sname": {
+        localStorage.setItem("sname", JSON.stringify(changeAtIndex(educationIndex, sname, value)))
+        setsName(changeAtIndex(educationIndex, sname, value)); 
+      break};
+      case "slocation": {
+        localStorage.setItem("slocation", JSON.stringify(changeAtIndex(educationIndex, slocation, value)))
+        setsLocation(changeAtIndex(educationIndex, slocation, value)); 
+      break};
+      case "schoolStartDate": {
+        localStorage.setItem("schoolStartDate", JSON.stringify(changeAtIndex(educationIndex, schoolStartDate, value)))
+        setSchoolStartDate(changeAtIndex(educationIndex, schoolStartDate, value));
+      break};
+      case "schoolEndDate": {
+        localStorage.setItem("schoolEndDate", JSON.stringify(changeAtIndex(educationIndex, schoolEndDate, value)))
+        setSchoolEndDate(changeAtIndex(educationIndex, schoolEndDate, value));
+      break};
 
-      case "company": {setCompany(changeAtIndex(experienceIndex, company, value)); break};
-      case "clocation": {setClocation(changeAtIndex(experienceIndex, clocation, value)); break};
-      case "role": {setRole(changeAtIndex(experienceIndex, role, value)); break};
-      case "jobStartDate": {setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, value)); break};
-      case "jobEndDate": {setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, value)); break};
-      case "jobDec": {setJobDec(changeAtIndex(experienceIndex, jobDec, value)); break};
-      case "skills": {setSkills(changeAtIndex(skillIndex, skills, value, propName)); break};
-      case "interests": {setInterests(value); break};
+      case "company": {
+        localStorage.setItem("company", JSON.stringify(changeAtIndex(educationIndex, company, value)))
+        setCompany(changeAtIndex(experienceIndex, company, value));
+      break};
+      case "clocation": {
+        localStorage.setItem("clocation", JSON.stringify(changeAtIndex(educationIndex, clocation, value)))
+        setClocation(changeAtIndex(experienceIndex, clocation, value));
+      break};
+      case "role": {
+        localStorage.setItem("role", JSON.stringify(changeAtIndex(educationIndex, role, value)))
+        setRole(changeAtIndex(experienceIndex, role, value));
+      break};
+      case "jobStartDate": {
+        localStorage.setItem("jobStartDate", JSON.stringify(changeAtIndex(educationIndex, jobStartDate, value)))
+        setJobStartDate(changeAtIndex(experienceIndex, jobStartDate, value));
+      break};
+      case "jobEndDate": {
+        localStorage.setItem("jobEndDate", JSON.stringify(changeAtIndex(educationIndex, jobEndDate, value)))
+        setJobEndDate(changeAtIndex(experienceIndex, jobEndDate, value));
+      break};
+      case "jobDec": {
+        localStorage.setItem("jobDec", JSON.stringify(changeAtIndex(educationIndex, jobDec, value)))
+        setJobDec(changeAtIndex(experienceIndex, jobDec, value));
+      break};
+      case "skills": {
+        localStorage.setItem("skills", JSON.stringify(changeAtIndex(educationIndex, skills, value)))
+        setSkills(changeAtIndex(skillIndex, skills, value, propName));
+      break};
+      case "interests": {
+        localStorage.setItem("interests", value)
+        setInterests(value);
+      break};
+    }
+  }
+
+  const handleImageChange = (e) => {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file)
+    reader.onload = function() {
+      setProfileImage(reader.result)
     }
   }
 
@@ -94,7 +164,6 @@ function Template() {
         obj[propName] = val
         newArr[i] = obj
         setRefresh(!refresh)
-        console.log(val, newArr)
         return newArr
       }
       let newArr = arr
@@ -107,7 +176,7 @@ function Template() {
     toPng(ref.current, { cacheBust: true})
       .then((dataUrl) => {
         const link = document.createElement('a')
-        link.download = fname.replace(' ', '') + 'resume.png'
+        link.download = fname.replace(/\s/g, '-') + '-resume.png'
         link.href = dataUrl
         link.click()
       })
@@ -127,9 +196,14 @@ function Template() {
           <Container>
               {/* <h1 ref={ref}>heello</h1> */}
               <>
-                <Button style={{margin: "0 auto", display: "block"}} size="lg" className="mb-4" variant="success" onClick={handleModel1Show}>
-                  Start Editing <i className="bi bi-pencil-square"></i>
-                </Button>
+                <header style={{textAlign: 'center'}}>
+                  <Button size="lg" className="mb-4" variant="success" onClick={handleModel1Show}>
+                    Start Editing <i className="bi bi-pencil-square"></i>
+                  </Button>
+                  <Button variant="danger" size="lg" className="mb-4" onClick={downloadCV}>
+                    Download <i className="bi bi-cloud-arrow-down-fill"></i>
+                  </Button>
+                </header>
                 {/** 
                  * first Model for collecting personal information!
                  */}
@@ -138,21 +212,26 @@ function Template() {
                     <Modal.Title>Personal Information:</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>Full Name:</Form.Label>
-                      <Form.Control onChange={(e) => handleChange(e, "name")} type="text" placeholder="Full Name" />
+                      <Form.Control value={fname} onChange={(e) => handleChange(e, "name")} type="text" placeholder="Full Name" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    {id == 2 &&
+                    <Form.Group className="mb-3">
+                      <Form.Label>Upload a picture</Form.Label>
+                      <p><input type="file" onChange={handleImageChange}/></p>
+                    </Form.Group>}
+                    <Form.Group className="mb-3">
                       <Form.Label>Phone #:</Form.Label>
-                      <Form.Control onChange={(e) => handleChange(e, "phone")} type="text" placeholder="Phone #" />
+                      <Form.Control value={phone} onChange={(e) => handleChange(e, "phone")} type="text" placeholder="Phone #" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPhone">
+                    <Form.Group className="mb-3">
                       <Form.Label>Email Address:</Form.Label>
-                      <Form.Control onChange={(e) => handleChange(e, "email")} type="text" placeholder="Email Address" />
+                      <Form.Control value={email} onChange={(e) => handleChange(e, "email")} type="text" placeholder="Email Address" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="mb-3">
                       <Form.Label>Overview about yourself:</Form.Label>
-                      <Form.Control onChange={(e) => handleChange(e, "overview")} as="textarea" rows={3} />
+                      <Form.Control value={overview} onChange={(e) => handleChange(e, "overview")} as="textarea" rows={3} />
                     </Form.Group>
                   </Modal.Body>
                   <Modal.Footer>
@@ -172,15 +251,15 @@ function Template() {
                     <Modal.Title>Education:</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>School Name:</Form.Label>
                       <Form.Control value={sname[educationIndex]} onChange={(e) => handleChange(e, "sname")} type="text" placeholder="Oxford University" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>School location:</Form.Label>
                       <Form.Control value={slocation[educationIndex]} onChange={(e) => handleChange(e, "slocation")} type="text" placeholder="San Fr, CA" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Row>
                         <Col>
                           <Form.Label>Start Date:</Form.Label>
@@ -192,13 +271,13 @@ function Template() {
                         </Col>
                       </Row>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>Major:</Form.Label>
                     <Form.Control value={major[educationIndex]} onChange={(e) => handleChange(e, "major")} type="text" placeholder="ex: Computer science" />
                     </Form.Group>
                     <Row>
                       <Col>
-                        { educationIndex <= 3 && 
+                        { educationIndex <= 2 && 
                           <Button size="sm" variant="success" onClick={() => {setEducationIndex(educationIndex+1)}}>
                             + Add education background
                           </Button>
@@ -231,15 +310,15 @@ function Template() {
                     <Modal.Title>Experience:</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>Company Name:</Form.Label>
                       <Form.Control value={company[experienceIndex]} onChange={(e) => handleChange(e, "company")} type="text" placeholder="Oxford University" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>Company location:</Form.Label>
                       <Form.Control value={clocation[experienceIndex]} onChange={(e) => handleChange(e, "clocation")} type="text" placeholder="San Fr, CA" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Row>
                         <Col>
                           <Form.Label>Start Date:</Form.Label>
@@ -251,11 +330,11 @@ function Template() {
                         </Col>
                       </Row>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>Job Title:</Form.Label>
                     <Form.Control value={role[experienceIndex]} onChange={(e) => handleChange(e, "role")} type="text" placeholder="ex: Computer science" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="mb-3">
                       <Form.Label>Job Description:</Form.Label>
                       <Form.Control value={jobDec[experienceIndex]} onChange={(e) => handleChange(e, "jobDec")} as="textarea" rows={3} />
                     </Form.Group>
@@ -293,11 +372,11 @@ function Template() {
                     <Modal.Title>Skills & Interests:</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>Skill Name:</Form.Label>
                       <Form.Control value={skills[skillIndex].name} onChange={(e) => handleChange(e, "skills", "name")} type="text" placeholder="San Fr, CA" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3">
                       <Form.Label>Level of proficiency:</Form.Label>
                       <Form.Select defaultValue={"1"} onChange={(e) => handleChange(e, "skills", "score")} aria-label="Default select example">
                         <option>-- Select one --</option>
@@ -310,7 +389,7 @@ function Template() {
                     </Form.Group>
                     <Row>
                       <Col>
-                        {skillIndex <= 3 &&
+                        {skillIndex <= 10 &&
                         <Button size="sm" variant="success" onClick={() => {setSkills([...skills, {}]); setSkillIndex(skillIndex+1)}}>
                           + Next skill
                         </Button>}
@@ -322,7 +401,7 @@ function Template() {
                         </Button>}
                       </Col>
                     </Row>
-                    <Form.Group className="mt-3 mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="mt-3 mb-3">
                       <Form.Label>Interests:</Form.Label>
                       <Form.Control value={interests} onChange={(e) => handleChange(e, "interests")} as="textarea" rows={3} placeholder="Ex: Football, programming." />
                       <Form.Text className="text-muted">
@@ -381,9 +460,12 @@ function Template() {
                 jobDec={clocation}
                 skills={skills}
                 interests={interests}
+                profileImage={profileImage}
               />}
+              
           </Container>
         </div>
+        <Footer />
     </>
     );
 }
