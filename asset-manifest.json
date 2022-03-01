@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/khalilettkhyly.github.io/Resume-Builder/static/css/main.d6db3d51.css",
-    "main.js": "/khalilettkhyly.github.io/Resume-Builder/static/js/main.d347e7d0.js",
-    "static/js/498.5e9a6c19.chunk.js": "/khalilettkhyly.github.io/Resume-Builder/static/js/498.5e9a6c19.chunk.js",
-    "static/js/703.a3004fb5.chunk.js": "/khalilettkhyly.github.io/Resume-Builder/static/js/703.a3004fb5.chunk.js",
-    "static/js/198.271fe84a.chunk.js": "/khalilettkhyly.github.io/Resume-Builder/static/js/198.271fe84a.chunk.js",
-    "static/js/787.28cb0dcd.chunk.js": "/khalilettkhyly.github.io/Resume-Builder/static/js/787.28cb0dcd.chunk.js",
-    "static/media/banner1.png": "/khalilettkhyly.github.io/Resume-Builder/static/media/banner1.94beaef5a97b82cc8ac2.png",
-    "static/media/bootstrap-icons.woff?": "/khalilettkhyly.github.io/Resume-Builder/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
-    "static/media/bootstrap-icons.woff2?": "/khalilettkhyly.github.io/Resume-Builder/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
-    "static/media/resume_2.jpg": "/khalilettkhyly.github.io/Resume-Builder/static/media/resume_2.4cf7cce0bad3d3f6a5ac.jpg",
-    "static/media/resume_1.jpg": "/khalilettkhyly.github.io/Resume-Builder/static/media/resume_1.51c2ebcfaffd287c2896.jpg",
-    "index.html": "/khalilettkhyly.github.io/Resume-Builder/index.html",
-    "main.d6db3d51.css.map": "/khalilettkhyly.github.io/Resume-Builder/static/css/main.d6db3d51.css.map",
-    "main.d347e7d0.js.map": "/khalilettkhyly.github.io/Resume-Builder/static/js/main.d347e7d0.js.map",
-    "498.5e9a6c19.chunk.js.map": "/khalilettkhyly.github.io/Resume-Builder/static/js/498.5e9a6c19.chunk.js.map",
-    "703.a3004fb5.chunk.js.map": "/khalilettkhyly.github.io/Resume-Builder/static/js/703.a3004fb5.chunk.js.map",
-    "198.271fe84a.chunk.js.map": "/khalilettkhyly.github.io/Resume-Builder/static/js/198.271fe84a.chunk.js.map",
-    "787.28cb0dcd.chunk.js.map": "/khalilettkhyly.github.io/Resume-Builder/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/Resume-Builder/static/css/main.1bcd7e86.css",
+    "main.js": "/Resume-Builder/static/js/main.3cd85624.js",
+    "static/js/498.5e9a6c19.chunk.js": "/Resume-Builder/static/js/498.5e9a6c19.chunk.js",
+    "static/js/703.a3004fb5.chunk.js": "/Resume-Builder/static/js/703.a3004fb5.chunk.js",
+    "static/js/198.271fe84a.chunk.js": "/Resume-Builder/static/js/198.271fe84a.chunk.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Resume-Builder/static/js/787.28cb0dcd.chunk.js",
+    "static/media/banner1.png": "/Resume-Builder/static/media/banner1.94beaef5a97b82cc8ac2.png",
+    "static/media/bootstrap-icons.woff?": "/Resume-Builder/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
+    "static/media/bootstrap-icons.woff2?": "/Resume-Builder/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
+    "static/media/resume_2.jpg": "/Resume-Builder/static/media/resume_2.4cf7cce0bad3d3f6a5ac.jpg",
+    "static/media/resume_1.jpg": "/Resume-Builder/static/media/resume_1.51c2ebcfaffd287c2896.jpg",
+    "index.html": "/Resume-Builder/index.html",
+    "main.1bcd7e86.css.map": "/Resume-Builder/static/css/main.1bcd7e86.css.map",
+    "main.3cd85624.js.map": "/Resume-Builder/static/js/main.3cd85624.js.map",
+    "498.5e9a6c19.chunk.js.map": "/Resume-Builder/static/js/498.5e9a6c19.chunk.js.map",
+    "703.a3004fb5.chunk.js.map": "/Resume-Builder/static/js/703.a3004fb5.chunk.js.map",
+    "198.271fe84a.chunk.js.map": "/Resume-Builder/static/js/198.271fe84a.chunk.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Resume-Builder/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6db3d51.css",
-    "static/js/main.d347e7d0.js"
+    "static/css/main.1bcd7e86.css",
+    "static/js/main.3cd85624.js"
   ]
 }
