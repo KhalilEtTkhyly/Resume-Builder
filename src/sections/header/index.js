@@ -11,9 +11,9 @@ function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-            <NavDropdown title="Resumes" id="collasible-nav-dropdown">
-                <NavDropdown.Item><Link to="/collection">With Images</Link></NavDropdown.Item>
-                <NavDropdown.Item><Link to="/collection">Without Images</Link></NavDropdown.Item>
+            <NavDropdown as="div" title="Resumes" id="collasible-nav-dropdown">
+                <Link to="/collection"><NavDropdown.Item as="span">With Images</NavDropdown.Item></Link>
+                <Link to="/collection"><NavDropdown.Item as="span">Without Images</NavDropdown.Item></Link>
             </NavDropdown>
             </Nav>
             <Nav>

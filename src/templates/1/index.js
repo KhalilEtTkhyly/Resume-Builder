@@ -37,6 +37,7 @@ function Template(props) {
     const skillSection = props.skills.map(function(val, i) {
       const num = parseInt(props.skills[i].score)
       if (Object.keys(val).length === 0) return;
+      if (!val.name) return;
       return(
           <div className="skills__item" key={i}>
             <ListGroup as="ul">

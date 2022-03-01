@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Carousel, Button, Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import Header from '../../sections/header'
+import Footer from '../../sections/footer'
 import image1 from '../../assets/images/resume_1.jpg'
 import image2 from '../../assets/images/resume_2.jpg'
 import { Link } from "react-router-dom";
@@ -19,7 +20,7 @@ function Collection() {
        * Features
       */}
       <Container>
-        <h1 className='h3 my-5 text-center'>Templates</h1>
+        <h1 className='h3 my-5 text-center'>Browse our Templates</h1>
         <Row>
           <Col className='text-center'>
             <Card style={{ width: '18rem' }}>
@@ -41,6 +42,7 @@ function Collection() {
           <Col></Col>
         </Row>
       </Container>
+      <Footer />
     </>
     );
 }
