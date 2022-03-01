@@ -60,9 +60,9 @@ function Template() {
     {name: "", score: 1},
   ]
 
-  const [skills, setSkills] = useState(localStorage.getItem("skills") ? JSON.parse(localStorage.getItem("skills")) : skillArr)
+  const [skills, setSkills] = useState(localStorage.getItem("skills") ? JSON.parse(localStorage.getItem("skills")) : skillArr);
 
-  const [interests, setInterests] = useState("java, PHP");
+  const [interests, setInterests] = useState(localStorage.getItem("interests") ? localStorage.getItem("interests") : "PHP, Java");
 
   const handleModel1Close = () => Model1Show(false);
   const handleModel1Show = () => Model1Show(true);
@@ -235,7 +235,7 @@ function Template() {
                   <Button size="lg" variant="success" onClick={handleModel1Show}>
                     Start Editing <i className="bi bi-pencil-square"></i>
                   </Button>
-                  <Dropdown style={{display: 'inline-block'}}>
+                  <Dropdown className='mx-2' style={{display: 'inline-block'}}>
                     <Dropdown.Toggle size="lg" variant="primary" id="dropdown-basic">
                       Download As <i className="bi bi-cloud-arrow-down-fill"></i>
                     </Dropdown.Toggle>
