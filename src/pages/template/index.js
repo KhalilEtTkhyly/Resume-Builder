@@ -202,10 +202,12 @@ function Template() {
     .then((dataUrl) => {
         if (format == "pdf") {
           const doc = new jsPDF({orientation: "p", unit: "px", format: "a1"});
+          const width = doc.internal.pageSize.getWidth();
           const img = new Image()
           img.src = dataUrl
           img.onload = () => {
-            doc.addImage(dataUrl, "PNG",0, 0, img.width, img.height);
+            console.log(width ,img.width)
+            doc.addImage(dataUrl, "PNG", ((width-img.width)/2), 15, img.width, img.height);
             doc.save()
           }
         } else {
