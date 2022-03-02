@@ -15,7 +15,7 @@ import 'animate.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='https://khalilettkhyly.github.io/Resume-Builder/'>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/collection" element={<Collection />} />
