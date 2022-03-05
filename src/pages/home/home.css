@@ -17,6 +17,12 @@
     height: 150px;
 }
 
+.feature-text {
+    position: relative;
+    bottom: -30%;
+    margin-bottom: 0 !important;
+}
+
 @media (max-width: 576px) {
     .slide1 {
         background-size: 100% !important;
@@ -29,3 +35,4 @@
         /* max-width: 400px !important; */
     }
 }
+
