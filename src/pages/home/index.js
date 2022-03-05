@@ -33,7 +33,7 @@ function App() {
         <Carousel.Item className='slide1'>
           <Carousel.Caption className='slideCaption'>
             <h3 className='h2' style={{color: "white"}}>Few minutes and your resume's ready!</h3>
-            <Link to="/collection">
+            <Link to="/resumes">
               <Button variant="light" size="lg" className='mt-3 animate__animated animate__headShake animate__infinite animate__slow'>
                 Browser Templates <i className="bi bi-arrow-right"></i>
               </Button>
@@ -48,24 +48,21 @@ function App() {
         <h1 className='h3 my-5 text-center'>Resumes made easy!</h1>
         <Row>
           <Col>
-            <h3 className='h4'>
+            <h3 className='h4 feature-text'>
               Hot and new templates are coming!
             </h3>
           </Col>
           <Col>
             <div className='circle mb-3'><i className="bi bi-cash"></i></div>
             <h3 className='h5'>Free of charge</h3>
-            <p>some text here</p>
           </Col>
           <Col>
             <div className='circle mb-3'><i className="bi bi-person-x"></i></div>
             <h3 className='h5'>No account needed</h3>
-            <p>some text here</p>
           </Col>
           <Col>
             <div className='circle mb-3'><i className="bi bi-stack"></i></div>
             <h3 className='h5'>multi templates</h3>
-            <p>some text here</p>
           </Col>
         </Row>
       </Container>
