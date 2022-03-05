@@ -15,10 +15,11 @@ import 'animate.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename='/Resume-Builder/'>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/collection" element={<Collection />} />
+        <Route path="/resumes/" element={<Collection />} />
+        <Route path="/resumes/:filter" element={<Collection />} />
         <Route path="template/:id" element={<Template />} />
       </Routes>
     </BrowserRouter>
